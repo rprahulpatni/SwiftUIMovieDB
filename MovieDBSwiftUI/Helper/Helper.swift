@@ -9,6 +9,12 @@ import Foundation
 import UIKit
 import SwiftUI
 
+extension String {
+    public var trimmed: String {
+        return trimmingCharacters(in: .whitespacesAndNewlines)
+    }
+}
+
 extension DateFormatter {
     static var longDateFormatter: DateFormatter {
         let formatter = DateFormatter()

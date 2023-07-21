@@ -33,6 +33,7 @@
 		0AD231242A6AF44100EFD3AA /* MovieDetailsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD231232A6AF44100EFD3AA /* MovieDetailsModel.swift */; };
 		0AD231262A6B0EEB00EFD3AA /* MovieDetailsViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD231252A6B0EEB00EFD3AA /* MovieDetailsViewCell.swift */; };
 		0AD231282A6B303900EFD3AA /* MovieDetailsReviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD231272A6B303900EFD3AA /* MovieDetailsReviewCell.swift */; };
+		0AD2312A2A6B3B1000EFD3AA /* MovieSearchRecources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD231292A6B3B1000EFD3AA /* MovieSearchRecources.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +63,7 @@
 		0AD231232A6AF44100EFD3AA /* MovieDetailsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsModel.swift; sourceTree = "<group>"; };
 		0AD231252A6B0EEB00EFD3AA /* MovieDetailsViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsViewCell.swift; sourceTree = "<group>"; };
 		0AD231272A6B303900EFD3AA /* MovieDetailsReviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsReviewCell.swift; sourceTree = "<group>"; };
+		0AD231292A6B3B1000EFD3AA /* MovieSearchRecources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieSearchRecources.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -172,6 +174,7 @@
 			children = (
 				0AD231032A6AB11700EFD3AA /* MovieListResources.swift */,
 				0AD231212A6AF1A400EFD3AA /* MovieDetailsResources.swift */,
+				0AD231292A6B3B1000EFD3AA /* MovieSearchRecources.swift */,
 			);
 			path = ApiResources;
 			sourceTree = "<group>";
@@ -286,6 +289,7 @@
 				0AD230F12A6AAE1800EFD3AA /* MovieDBSwiftUI.xcdatamodeld in Sources */,
 				0AD2310F2A6ABF4600EFD3AA /* MovieListCell.swift in Sources */,
 				0AD230EE2A6AAE1800EFD3AA /* Persistence.swift in Sources */,
+				0AD2312A2A6B3B1000EFD3AA /* MovieSearchRecources.swift in Sources */,
 				0AD2311E2A6AECEB00EFD3AA /* MovieDetailsGridViewCell.swift in Sources */,
 				0AD2310C2A6ABEA300EFD3AA /* LoadingView.swift in Sources */,
 				0AD2311A2A6AEAA300EFD3AA /* SearchMovieViewModel.swift in Sources */,

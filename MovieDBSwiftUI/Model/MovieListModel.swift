@@ -60,3 +60,28 @@ enum OriginalLanguage: String, Codable {
     case fi = "fi"
     case uk = "uk"
 }
+
+struct MovieSearchModel: Codable {
+    var page: Int?
+    var results: [MovieSearchData]
+    var totalPages, totalResults: Int
+
+    enum CodingKeys: String, CodingKey {
+        case page, results
+        case totalPages = "total_pages"
+        case totalResults = "total_results"
+    }
+}
+
+// MARK: - Result
+struct MovieSearchData: Codable {
+    var id: Int?
+    var posterPath, releaseDate, title: String?
+
+    enum CodingKeys: String, CodingKey {
+        case id = "id"
+        case posterPath = "poster_path"
+        case releaseDate = "release_date"
+        case title = "title"
+    }
+}

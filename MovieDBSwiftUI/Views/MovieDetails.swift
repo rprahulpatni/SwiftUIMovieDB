@@ -35,7 +35,6 @@ struct MovieDetails: View {
                 viewModel.getMovieReviewDetails(movieId)
             }
             .navigationBarTitle("Movie Detail", displayMode: .inline)
-            .navigationBarBackButtonHidden(true)
         }
     }
 }
