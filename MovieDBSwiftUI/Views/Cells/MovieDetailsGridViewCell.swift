@@ -35,6 +35,7 @@ struct MovieDetailsGridViewCell: View {
                 .resizable()
                 .aspectRatio(contentMode: .fill)
                 .frame(width: 120, height: 140)
+                .clipped()
                 
                 Rectangle()
                     .foregroundColor(Color.black)

@@ -6,13 +6,15 @@
 //
 
 import Foundation
+import CoreData
+
 
 struct MovieListModel: Codable {
     var dates: MoviesDates
     var page: Int
     var results: [MovieListData]
     var totalPages, totalResults: Int
-
+    
     enum CodingKeys: String, CodingKey {
         case dates, page, results
         case totalPages = "total_pages"
@@ -38,7 +40,7 @@ struct MovieListData: Codable {
     var video: Bool
     var voteAverage: Double
     var voteCount: Int
-
+    
     enum CodingKeys: String, CodingKey {
         case adult
         case backdropPath = "backdrop_path"
@@ -65,7 +67,7 @@ struct MovieSearchModel: Codable {
     var page: Int?
     var results: [MovieSearchData]
     var totalPages, totalResults: Int
-
+    
     enum CodingKeys: String, CodingKey {
         case page, results
         case totalPages = "total_pages"
@@ -73,15 +75,22 @@ struct MovieSearchModel: Codable {
     }
 }
 
-// MARK: - Result
 struct MovieSearchData: Codable {
     var id: Int?
-    var posterPath, releaseDate, title: String?
-
+    var posterPath, title: String?
+    
     enum CodingKeys: String, CodingKey {
         case id = "id"
         case posterPath = "poster_path"
-        case releaseDate = "release_date"
         case title = "title"
     }
+}
+
+// MARK: - Result
+@objc(SearchedMovieData)
+public class SearchedMovieData: NSManagedObject {
+    @NSManaged public var timestamp: Date
+    @NSManaged public var id: Int64
+    @NSManaged public var posterPath: String?
+    @NSManaged public var title: String?
 }

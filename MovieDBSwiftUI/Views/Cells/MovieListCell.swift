@@ -15,11 +15,19 @@ struct MovieListCell: View {
         HStack(alignment: .center) {
             HStack(spacing: 10){
                 let imgUrl = URL(string: "\(imagePath + moviesData.posterPath)")
-                WebImage(url: imgUrl)
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 80, height: 80)
-                    .background(.red)
+                WebImage(url: imgUrl).placeholder{
+                    Image(systemName: "film")
+                        .resizable()
+                        .frame(width: 80, height: 80)
+                        .background(.gray.opacity(0.5))
+                        .background(.gray.opacity(0.5))
+                }
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+                .frame(width: 80, height: 80)
+                .clipped()
+                .background(.gray.opacity(0.6))
+                
                 VStack(alignment: .leading, spacing: 05, content: {
                     Text("\(moviesData.title)").fontWeight(.semibold).lineLimit(1)
                         .foregroundColor(.black)

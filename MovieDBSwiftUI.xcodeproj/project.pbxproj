@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A4A72022A6BEC4500046605 /* CustomBackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4A72012A6BEC4500046605 /* CustomBackButton.swift */; };
 		0AD230E52A6AAE1400EFD3AA /* MovieDBSwiftUIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD230E42A6AAE1400EFD3AA /* MovieDBSwiftUIApp.swift */; };
 		0AD230E72A6AAE1400EFD3AA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD230E62A6AAE1400EFD3AA /* ContentView.swift */; };
 		0AD230E92A6AAE1800EFD3AA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0AD230E82A6AAE1800EFD3AA /* Assets.xcassets */; };
@@ -37,6 +38,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0A4A72002A6BE78200046605 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		0A4A72012A6BEC4500046605 /* CustomBackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomBackButton.swift; sourceTree = "<group>"; };
 		0AD230E12A6AAE1400EFD3AA /* MovieDBSwiftUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieDBSwiftUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0AD230E42A6AAE1400EFD3AA /* MovieDBSwiftUIApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDBSwiftUIApp.swift; sourceTree = "<group>"; };
 		0AD230E62A6AAE1400EFD3AA /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -97,6 +100,7 @@
 		0AD230E32A6AAE1400EFD3AA /* MovieDBSwiftUI */ = {
 			isa = PBXGroup;
 			children = (
+				0A4A72002A6BE78200046605 /* Info.plist */,
 				0AD230FB2A6AB05700EFD3AA /* Helper */,
 				0AD230FA2A6AB04A00EFD3AA /* NetworkManager */,
 				0AD230F92A6AB04400EFD3AA /* Views */,
@@ -191,6 +195,7 @@
 			isa = PBXGroup;
 			children = (
 				0AD2310B2A6ABEA300EFD3AA /* LoadingView.swift */,
+				0A4A72012A6BEC4500046605 /* CustomBackButton.swift */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -289,6 +294,7 @@
 				0AD230F12A6AAE1800EFD3AA /* MovieDBSwiftUI.xcdatamodeld in Sources */,
 				0AD2310F2A6ABF4600EFD3AA /* MovieListCell.swift in Sources */,
 				0AD230EE2A6AAE1800EFD3AA /* Persistence.swift in Sources */,
+				0A4A72022A6BEC4500046605 /* CustomBackButton.swift in Sources */,
 				0AD2312A2A6B3B1000EFD3AA /* MovieSearchRecources.swift in Sources */,
 				0AD2311E2A6AECEB00EFD3AA /* MovieDetailsGridViewCell.swift in Sources */,
 				0AD2310C2A6ABEA300EFD3AA /* LoadingView.swift in Sources */,
@@ -437,11 +443,10 @@
 				DEVELOPMENT_ASSET_PATHS = "\"MovieDBSwiftUI/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MovieDBSwiftUI/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -465,11 +470,10 @@
 				DEVELOPMENT_ASSET_PATHS = "\"MovieDBSwiftUI/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MovieDBSwiftUI/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

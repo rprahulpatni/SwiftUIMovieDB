@@ -25,12 +25,26 @@ struct MovieDetailsSectionWithGridViewCell: View {
             ScrollView(.horizontal, showsIndicators: false){
                 LazyHGrid(rows: gridHLayout, alignment: .center, spacing: 10) {
                     if categoryName == "Similar Results" {
-                        ForEach(movieSimilar, id: \.id) { item in
-                            MovieDetailsGridViewCell(movieSimilar: item, movieCastNCrew: nil, categoryName: self.categoryName)
+                        if movieSimilar.count > 0 {
+                            ForEach(movieSimilar, id: \.id) { item in
+                                MovieDetailsGridViewCell(movieSimilar: item, movieCastNCrew: nil, categoryName: self.categoryName)
+                            }
+                        } else {
+                            Text("No Record Found!!")
+                                .frame(maxWidth: .infinity)
+                                .frame(height: 30)
+                                .padding(.bottom, 10)
                         }
                     } else {
-                        ForEach(movieCastNCrew, id: \.id) { item in
-                            MovieDetailsGridViewCell(movieSimilar: nil, movieCastNCrew: item, categoryName: self.categoryName)
+                        if movieCastNCrew.count > 0 {
+                            ForEach(movieCastNCrew, id: \.id) { item in
+                                MovieDetailsGridViewCell(movieSimilar: nil, movieCastNCrew: item, categoryName: self.categoryName)
+                            }
+                        } else {
+                            Text("No Record Found!!")
+                                .frame(maxWidth: .infinity)
+                                .frame(height: 30)
+                                .padding(.bottom, 10)
                         }
                     }
                 }

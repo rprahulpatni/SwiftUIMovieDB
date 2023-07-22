@@ -21,43 +21,56 @@ struct MovieDetailsReviewCell: View {
                 .padding(.all, 15)
                 .padding(.bottom, -10)
             Divider()
-            HStack{
-                let imgUrl = URL(string: imagePath +  "\(movieReview?.authorDetails?.avatarPath ?? "")")
-                WebImage(url: imgUrl).placeholder{
-                    Image(systemName: "person.circle.fill")
-                        .resizable()
-                        .background(.gray.opacity(0.5))
-                }
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .frame(width: 40, height: 40)
-                .cornerRadius(20)
-                .clipShape(Circle())
-                
-                Text(movieReview?.authorDetails?.username?.capitalized ?? "NA")
-                    .font(.caption)
-            }
-            .padding(.top, 10)
-            .padding(.leading, 15)
             
-            Text(movieReview?.content ?? "")
-                .font(.caption)
-                .lineLimit(isExpanded == true ? 1000 : 5)
-                .padding(.all, 15)
-            Divider()
-            Button(action: {
-                withAnimation(.easeIn(duration: 0.25)) {
-                    isExpanded.toggle()
-                }
-            }, label: {
-                Text(isExpanded == true ? "View Less Reviews" : "View All Reviews")
+            if let content = movieReview?.content, content != "" {
+                ReviewAuthorsDetails()
+                Text(movieReview?.content ?? "")
                     .font(.caption)
-            })
-            .frame(height: 40)
-            .frame(maxWidth: .infinity)
-            .padding(.bottom, 5)
+                    .lineLimit(isExpanded == true ? 1000 : 5)
+                    .padding(.all, 15)
+                Divider()
+                Button(action: {
+                    withAnimation(.easeIn(duration: 0.25)) {
+                        isExpanded.toggle()
+                    }
+                }, label: {
+                    Text(isExpanded == true ? "View Less Reviews" : "View All Reviews")
+                        .font(.caption)
+                })
+                .frame(height: 40)
+                .frame(maxWidth: .infinity)
+                .padding(.bottom, 5)
+            } else {
+                Text("No Record Found!!")
+                    .hAlign(.leading)
+                    .frame(height: 50)
+                    .padding(.leading, 10)
+                    .padding(.bottom, 10)
+            }
         }
         .background(.clear)
+    }
+    
+    @ViewBuilder
+    func ReviewAuthorsDetails()-> some View {
+        HStack{
+            let imgUrl = URL(string: imagePath +  "\(movieReview?.authorDetails?.avatarPath ?? "")")
+            WebImage(url: imgUrl).placeholder{
+                Image(systemName: "person.circle.fill")
+                    .resizable()
+                    .background(.gray.opacity(0.5))
+            }
+            .resizable()
+            .aspectRatio(contentMode: .fill)
+            .frame(width: 40, height: 40)
+            .cornerRadius(20)
+            .clipShape(Circle())
+            
+            Text(movieReview?.authorDetails?.username?.capitalized ?? "NA")
+                .font(.caption)
+        }
+        .padding(.top, 10)
+        .padding(.leading, 15)
     }
 }
 
