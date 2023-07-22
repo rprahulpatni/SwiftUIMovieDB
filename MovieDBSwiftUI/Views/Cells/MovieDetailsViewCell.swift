@@ -14,7 +14,13 @@ struct MovieDetailsViewCell: View {
     var body: some View {
         VStack{
             let imgBackdropUrl = URL(string: imagePath +  "\(movieDetails.backdropPath ?? "")")
-            WebImage(url: imgBackdropUrl)
+            WebImage(url: imgBackdropUrl).placeholder{
+                Image(systemName: "film")
+                    .resizable()
+                    .frame(height: 220)
+                    .frame(maxWidth: .infinity)
+                    .background(.gray.opacity(0.5))
+            }
                 .resizable()
                 .frame(height: 220)
                 .frame(maxWidth: .infinity)

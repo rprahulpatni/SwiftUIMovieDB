@@ -17,7 +17,7 @@ struct MovieList: View {
                 LazyVGrid(columns: gridVLayout) {
                     ForEach(viewModel.arrMovieList, id: \.id) { movies in
                         NavigationLink(destination: {
-                            MovieDetails(movieId: movies.id)
+                            MovieDetails(movieId: movies.id,isFromSearch: false, movieSearchData: nil)
                         }, label: {
                             MovieListCell(moviesData: movies)
                         })

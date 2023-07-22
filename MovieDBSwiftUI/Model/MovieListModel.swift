@@ -87,10 +87,10 @@ struct MovieSearchData: Codable {
 }
 
 // MARK: - Result
-@objc(SearchedMovieData)
-public class SearchedMovieData: NSManagedObject {
-    @NSManaged public var timestamp: Date
-    @NSManaged public var id: Int64
-    @NSManaged public var posterPath: String?
-    @NSManaged public var title: String?
-}
+//@objc(SearchedMovieData)
+//public class SearchedMovieData: NSManagedObject {
+//    @NSManaged public var timestamp: Date
+//    @NSManaged public var id: Int64
+//    @NSManaged public var posterPath: String?
+//    @NSManaged public var title: String?
+//}
