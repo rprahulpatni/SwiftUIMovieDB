@@ -37,7 +37,7 @@ struct MovieDetails: View {
                         .background(.white)
                     MovieDetailsSectionWithGridViewCell(categoryName: "Crew", movieSimilar: viewModel.arrSimilarMovieList, movieCastNCrew: viewModel.arrMovieCrewList)
                         .background(.white)
-                    MovieDetailsReviewCell(categoryName: "Reviews", movieReview: viewModel.arrReviewMovieList.first ?? nil)
+                    MovieDetailsReviewCell(categoryName: "Reviews", movieId: self.movieId, movieReview: viewModel.arrReviewMovieList)
                         .background(.white)
                     MovieDetailsSectionWithGridViewCell(categoryName: "Similar Results", movieSimilar: viewModel.arrSimilarMovieList, movieCastNCrew: viewModel.arrMovieCrewList)
                         .background(.white)

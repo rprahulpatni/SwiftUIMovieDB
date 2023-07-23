@@ -14,8 +14,7 @@ class MovieListViewModel: ObservableObject {
     
     //    private var resources : MovieListResources = MovieListResources()
     var totalPages: Int = 0
-    var limit: Int = 0
-    var skip: Int = 0
+    var pageCount: Int = 1
     private var cancellables = Set<AnyCancellable>()
     
     //    func getMovieList(_ showLoader: Bool) {
@@ -37,8 +36,12 @@ class MovieListViewModel: ObservableObject {
     //    }
     
     func getMovieList(_ showLoader: Bool) {
-        self.isLoading = true
-        NetworkManager.shared.callAPI(for: MovieListModel.self, urlString: URLEndpoints.getMovieList)
+        if showLoader {
+            self.isLoading = true
+        }
+        let strURL = URLEndpoints.getMovieList + "\(pageCount)"
+        print(strURL)
+        NetworkManager.shared.callAPI(for: MovieListModel.self, urlString: URL(string: strURL)!)
             .sink(receiveCompletion: { completion in
                 switch completion {
                 case .finished:
@@ -48,7 +51,9 @@ class MovieListViewModel: ObservableObject {
                     self.isLoading = false
                 }
             }, receiveValue: { movieList in
-                self.arrMovieList.append(contentsOf: movieList.results)
+                self.arrMovieList.append(contentsOf: movieList.results.sorted(by: {$0.voteAverage! > $1.voteAverage!}))
+                self.totalPages = movieList.totalPages
+                self.pageCount += 1//movieList.page
                 self.isLoading = false
             })
             .store(in: &cancellables)

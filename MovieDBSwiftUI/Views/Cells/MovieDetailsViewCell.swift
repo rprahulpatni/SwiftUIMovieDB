@@ -17,6 +17,7 @@ struct MovieDetailsViewCell: View {
             WebImage(url: imgBackdropUrl).placeholder{
                 Image(systemName: "film")
                     .resizable()
+                    .foregroundColor(.black)
                     .frame(height: 220)
                     .frame(maxWidth: .infinity)
                     .background(.gray.opacity(0.5))

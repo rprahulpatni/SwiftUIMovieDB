@@ -27,7 +27,11 @@ struct MovieDetailsSectionWithGridViewCell: View {
                     if categoryName == "Similar Results" {
                         if movieSimilar.count > 0 {
                             ForEach(movieSimilar, id: \.id) { item in
-                                MovieDetailsGridViewCell(movieSimilar: item, movieCastNCrew: nil, categoryName: self.categoryName)
+                                NavigationLink(destination: {
+                                    MovieDetails(movieId: item.id ?? 0,isFromSearch: false, movieSearchData: nil)
+                                }, label: {
+                                    MovieDetailsGridViewCell(movieSimilar: item, movieCastNCrew: nil, categoryName: self.categoryName)
+                                })
                             }
                         } else {
                             Text("No Record Found!!")

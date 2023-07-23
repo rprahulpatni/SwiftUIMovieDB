@@ -17,13 +17,30 @@ struct MovieList: View {
                 LazyVGrid(columns: gridVLayout) {
                     ForEach(viewModel.arrMovieList, id: \.id) { movies in
                         NavigationLink(destination: {
-                            MovieDetails(movieId: movies.id,isFromSearch: false, movieSearchData: nil)
+                            MovieDetails(movieId: movies.id ?? 0,isFromSearch: false, movieSearchData: nil)
                         }, label: {
                             MovieListCell(moviesData: movies)
                         })
+                        if movies.id == viewModel.arrMovieList.last?.id {
+                            if viewModel.pageCount <= viewModel.totalPages {
+                                ProgressView(label: {
+                                    Text("Loading")
+                                }).progressViewStyle(.circular)
+                                    .tint(.red)
+                                    .onAppear(perform: {
+                                        viewModel.getMovieList(false)
+                                    })
+                            }
+                        }
                     }
                 }
                 .padding(.all, 10)
+            }
+            .refreshable{
+                viewModel.pageCount = 1
+                viewModel.totalPages = 0
+                viewModel.arrMovieList.removeAll()
+                viewModel.getMovieList(true)
             }
             .onAppear(perform: {
                 viewModel.getMovieList(true)

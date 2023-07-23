@@ -29,8 +29,9 @@ struct MovieDetailsGridViewCell: View {
                 WebImage(url: imgUrl).placeholder{
                     Image(systemName: "film")
                         .resizable()
+                        .foregroundColor(.black)
                         .frame(width: 120, height: 140)
-                        .background(.gray.opacity(0.5))
+                        .background(.gray.opacity(0.6))
                 }
                 .resizable()
                 .aspectRatio(contentMode: .fill)

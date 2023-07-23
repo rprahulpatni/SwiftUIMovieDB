@@ -39,8 +39,9 @@ class SearchMovieViewModel: ObservableObject {
     
     func getMovieList(_ showLoader: Bool, searchText: String) {
         self.isLoading = true
-        let strUrl = URLEndpoints.getMovieSearch + "\(searchText.trimmed)"
-        NetworkManager.shared.callAPI(for: MovieSearchModel.self, urlString: URL(string: strUrl)!)
+        let strUrl = URLEndpoints.getMovieSearch + "\(searchText)"
+        guard let encodedString = strUrl.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {return}
+        NetworkManager.shared.callAPI(for: MovieSearchModel.self, urlString: URL(string: encodedString)!)
             .sink(receiveCompletion: { completion in
                 switch completion {
                 case .finished:

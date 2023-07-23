@@ -40,21 +40,36 @@ struct SearchMovie: View {
                         .padding(.all, 10)
                     }
                 } else {
-                    Text("Recently Searched")
-                        .hAlign(.leading)
-                        .padding(.leading, 15)
-                    ScrollView(.vertical, showsIndicators: false) {
-                        LazyVGrid(columns: gridVLayout) {
-                            ForEach(recentSearches, id: \.id) { item in
-                                let movie = MovieSearchData(id: Int(item.id), posterPath: item.posterPath, title: item.title)
-                                NavigationLink{
-                                    MovieDetails(movieId: Int(item.id), isFromSearch: false, movieSearchData: nil)
-                                } label: {
-                                    SearchUI(item: movie)
+                    if recentSearches.count > 0 {
+                        Text("Recently Searched")
+                            .hAlign(.leading)
+                            .padding(.leading, 15)
+                        ScrollView(.vertical, showsIndicators: false) {
+                            LazyVGrid(columns: gridVLayout) {
+                                ForEach(recentSearches, id: \.id) { item in
+                                    let movie = MovieSearchData(id: Int(item.id), posterPath: item.posterPath, title: item.title)
+                                    NavigationLink{
+                                        MovieDetails(movieId: Int(item.id), isFromSearch: false, movieSearchData: nil)
+                                    } label: {
+                                        SearchUI(item: movie)
+                                    }
                                 }
                             }
+                            .padding(.all, 10)
                         }
-                        .padding(.all, 10)
+                    } else {
+                        VStack(alignment: .center, spacing: 10){
+                            Image(systemName: "magnifyingglass")
+                                .resizable()
+                                .foregroundColor(.gray.opacity(0.3))
+                                .frame(width: 100, height: 100)
+                            Text("No Result Found!!")
+                                .foregroundColor(.gray.opacity(0.3))
+                                .font(.headline)
+                        }
+                        .padding(15)
+                        .hAlign(.center)
+                        .vAlign(.center)
                     }
                 }
             }
@@ -63,11 +78,14 @@ struct SearchMovie: View {
             .navigationBarItems(leading: CustomBackButton())
             .searchable(text: $viewModel.searchText)
             .onSubmit(of: .search, {
-                viewModel.getMovieList(true, searchText: viewModel.searchText)
+                self.viewModel.getMovieList(true, searchText: viewModel.searchText)
             })
             .onChange(of: viewModel.searchText, perform: { newValue in
                 if newValue.isEmpty {
                     self.viewModel.arrMovieList = []
+                } else {
+                    self.viewModel.arrMovieList = []
+                    self.viewModel.getMovieList(true, searchText: viewModel.searchText)
                 }
             })
         }
@@ -81,12 +99,15 @@ struct SearchMovie: View {
                 WebImage(url: imgUrl).placeholder{
                     Image(systemName: "film")
                         .resizable()
+                        .foregroundColor(.black)
                         .frame(width: 40, height: 40)
                         .background(.gray.opacity(0.5))
                 }
                 .resizable()
-                .aspectRatio(contentMode: .fill)
+                .indicator(.activity)
+                .transition(.fade)
                 .frame(width: 40, height: 40)
+                .scaledToFit()
                 .background(.gray.opacity(0.5))
                 .clipped()
                 
