@@ -8,6 +8,8 @@
 		<string>.white</string>
 		<key>UIImageName</key>
 		<string>logo</string>
+		<key>UIImageRespectsSafeAreaInsets</key>
+		<false/>
 	</dict>
 </dict>
 </plist>

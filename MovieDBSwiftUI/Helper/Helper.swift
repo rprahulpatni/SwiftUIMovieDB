@@ -47,7 +47,7 @@ extension DateFormatter {
     static func convertMinutesToHoursAndMinutes(_ minutes: Int) -> String {
         let hours = minutes / 60
         let remainingMinutes = minutes % 60
-
+        
         if hours > 0 {
             if remainingMinutes > 0 {
                 return "\(hours)h \(remainingMinutes)min"
@@ -58,7 +58,7 @@ extension DateFormatter {
             return "\(remainingMinutes)min"
         }
     }
-
+    
 }
 
 extension UIImage {
@@ -125,5 +125,33 @@ extension View {
                 RoundedRectangle(cornerRadius: 5, style: .continuous)
                     .fill(color)
             }
+    }
+    
+    func navigationBarColor(backgroundColor: UIColor, tintColor: UIColor) -> some View {
+        self.modifier(NavigationBarColorModifier(backgroundColor: backgroundColor, tintColor: tintColor))
+    }
+}
+
+struct NavigationBarColorModifier: ViewModifier {
+    var backgroundColor: UIColor
+    var tintColor: UIColor
+    
+    init(backgroundColor: UIColor, tintColor: UIColor) {
+        self.backgroundColor = backgroundColor
+        self.tintColor = tintColor
+        
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        appearance.backgroundColor = backgroundColor
+        appearance.titleTextAttributes = [.foregroundColor: tintColor]
+        appearance.largeTitleTextAttributes = [.foregroundColor: tintColor]
+        UINavigationBar.appearance().standardAppearance = appearance
+        UINavigationBar.appearance().compactAppearance = appearance
+        UINavigationBar.appearance().scrollEdgeAppearance = appearance
+        UINavigationBar.appearance().tintColor = tintColor
+    }
+    
+    func body(content: Content) -> some View {
+        content
     }
 }

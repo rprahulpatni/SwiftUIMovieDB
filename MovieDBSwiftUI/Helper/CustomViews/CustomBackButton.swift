@@ -15,6 +15,7 @@ struct CustomBackButton: View {
             self.presentationMode.wrappedValue.dismiss()
         } label: {
             Image(systemName: "chevron.backward").font(.title2)
+//                .foregroundColor(.white)
         }
     }
 }

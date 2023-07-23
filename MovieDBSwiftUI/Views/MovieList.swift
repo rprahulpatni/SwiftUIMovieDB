@@ -46,9 +46,12 @@ struct MovieList: View {
                 viewModel.getMovieList(true)
             })
             .navigationBarTitle("Movie's List",displayMode: .inline)
+            //Open if you want to change Navigation header color
+//            .navigationBarColor(backgroundColor: .purple, tintColor: .white)
             .toolbar {
                 NavigationLink(destination: SearchMovie()) {
                     Image(systemName: "magnifyingglass")
+//                        .foregroundColor(.white)
                 }
             }
         }

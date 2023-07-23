@@ -13,8 +13,7 @@ struct MovieDBSwiftUIApp: App {
 
     var body: some Scene {
         WindowGroup {
-            MovieList()
-            //ContentView()
+            ContentView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }
