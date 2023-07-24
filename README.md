@@ -86,7 +86,8 @@ The project follows a structured folder organization to keep the code organized 
 MovieDBSwiftUI/
 |-- Info.plist
 |-- AppEntry/
-|   |-- View/
+|   |-- MovieDBSwiftUIApp
+|-- View/
 |   |   |-- Cells/
 |   |   |-- SplashView
 |   |   |-- MovieList
