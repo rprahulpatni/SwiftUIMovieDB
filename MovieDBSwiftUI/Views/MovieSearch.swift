@@ -1,5 +1,5 @@
 //
-//  SearchMovie.swift
+//  MovieSearch.swift
 //  MovieDBSwiftUI
 //
 //  Created by Neosoft on 21/07/23.
@@ -9,8 +9,8 @@ import SwiftUI
 import SDWebImageSwiftUI
 import CoreData
 
-struct SearchMovie: View {
-    @ObservedObject var viewModel: SearchMovieViewModel = SearchMovieViewModel()
+struct MovieSearch: View {
+    @ObservedObject var viewModel: MovieSearchViewModel = MovieSearchViewModel()
     @Environment(\.managedObjectContext) private var viewContext
     @FetchRequest(
         entity: SearchedMovie.entity(),
@@ -153,8 +153,8 @@ struct SearchMovie: View {
     }
 }
 
-struct SearchMovie_Previews: PreviewProvider {
+struct MovieSearch_Previews: PreviewProvider {
     static var previews: some View {
-        SearchMovie()
+        MovieSearch()
     }
 }

@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  SplashView.swift
 //  MovieDBSwiftUI
 //
 //  Created by Neosoft on 21/07/23.
@@ -8,7 +8,7 @@
 import SwiftUI
 
 //Works as Splash screen or app entry point
-struct ContentView: View {
+struct SplashView: View {
     @State private var isLogoAnimated = false
     @State private var showMainView = false
     
@@ -35,8 +35,8 @@ struct ContentView: View {
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
+struct SplashView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        SplashView()
     }
 }

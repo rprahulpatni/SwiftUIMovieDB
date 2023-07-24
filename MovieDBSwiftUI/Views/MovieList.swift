@@ -49,7 +49,7 @@ struct MovieList: View {
             //Open if you want to change Navigation header color
 //            .navigationBarColor(backgroundColor: .purple, tintColor: .white)
             .toolbar {
-                NavigationLink(destination: SearchMovie()) {
+                NavigationLink(destination: MovieSearch()) {
                     Image(systemName: "magnifyingglass")
 //                        .foregroundColor(.white)
                 }

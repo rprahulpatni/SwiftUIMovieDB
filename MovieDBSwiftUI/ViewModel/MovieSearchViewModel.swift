@@ -1,5 +1,5 @@
 //
-//  SearchMovieViewModel.swift
+//  MovieSearchViewModel.swift
 //  MovieDBSwiftUI
 //
 //  Created by Neosoft on 21/07/23.
@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-class SearchMovieViewModel: ObservableObject {
+class MovieSearchViewModel: ObservableObject {
     private var cancellables = Set<AnyCancellable>()
     
     @Published var searchText: String = ""
