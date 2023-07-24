@@ -13,6 +13,7 @@ struct MovieDetailsSectionWithGridViewCell: View {
     var movieSimilar: [MovieSimilarData]
     var movieCastNCrew: [MovieCastNCrewData]
     @State private var gridHLayout : [GridItem] = [GridItem(.flexible())]
+    var onTab:(Int) -> Void
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -27,11 +28,15 @@ struct MovieDetailsSectionWithGridViewCell: View {
                     if categoryName == "Similar Results" {
                         if movieSimilar.count > 0 {
                             ForEach(movieSimilar, id: \.id) { item in
-                                NavigationLink(destination: {
-                                    MovieDetails(movieId: item.id ?? 0,isFromSearch: false, movieSearchData: nil)
-                                }, label: {
-                                    MovieDetailsGridViewCell(movieSimilar: item, movieCastNCrew: nil, categoryName: self.categoryName)
-                                })
+                                MovieDetailsGridViewCell(movieSimilar: item, movieCastNCrew: nil, categoryName: self.categoryName)
+                                    .onTapGesture {
+                                        self.onTab(item.id ?? 0)
+                                    }
+//                                NavigationLink(destination: {
+//                                    MovieDetails(movieId: item.id ?? 0,isFromSearch: false, movieSearchData: nil)
+//                                }, label: {
+//                                    MovieDetailsGridViewCell(movieSimilar: item, movieCastNCrew: nil, categoryName: self.categoryName)
+//                                })
                             }
                         } else {
                             Text("No Record Found!!")

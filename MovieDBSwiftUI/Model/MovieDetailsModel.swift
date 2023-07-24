@@ -8,7 +8,7 @@
 import Foundation
 
 // MARK: - Welcome
-struct MovieDetailsModel: Codable {
+struct MovieDetailsModel: Decodable, Hashable {
     var id: Int?
     var backdropPath: String?
     var posterPath: String?
@@ -36,13 +36,13 @@ struct MovieDetailsModel: Codable {
 }
 
 // MARK: - Genre
-struct Genre: Codable {
+struct Genre: Decodable, Hashable {
     let id: Int?
     let name: String?
 }
 
 // MARK: - Welcome
-struct MovieCastNCrewModel: Codable {
+struct MovieCastNCrewModel: Decodable, Identifiable, Hashable {
     var id: Int?
     var cast, crew: [MovieCastNCrewData]
     
@@ -68,7 +68,7 @@ struct MovieCastNCrewData: Hashable, Codable, Identifiable {
 }
 
 // MARK: - MovieReviews
-struct MovieReviewsModel: Codable {
+struct MovieReviewsModel: Decodable, Identifiable, Hashable {
     var id, page: Int?
     var results: [MovieReviewsData]
     var totalPages, totalResults: Int?
@@ -83,7 +83,7 @@ struct MovieReviewsModel: Codable {
 }
 
 // MARK: - Result
-struct MovieReviewsData: Codable {
+struct MovieReviewsData: Decodable, Hashable {
     var author: String?
     var authorDetails: AuthorDetails?
     var content, createdAt, id, updatedAt: String?
@@ -101,21 +101,21 @@ struct MovieReviewsData: Codable {
 }
 
 // MARK: - AuthorDetails
-struct AuthorDetails: Codable {
+struct AuthorDetails: Decodable, Hashable {
     var name, username, avatarPath: String?
-    var rating: Int?
+//    var rating: Int?
     
     enum CodingKeys: String, CodingKey {
         case name = "name"
         case username = "username"
         case avatarPath = "avatar_path"
-        case rating = "rating"
+//        case rating = "rating"
     }
 }
 
 ////////////
 // MARK: - Similar Movies
-struct MovieSimilarModel: Codable {
+struct MovieSimilarModel: Decodable, Hashable {
     var page: Int?
     var results: [MovieSimilarData]
     var totalPages, totalResults: Int?
@@ -128,7 +128,7 @@ struct MovieSimilarModel: Codable {
 }
 
 // MARK: - Result
-struct MovieSimilarData: Codable {
+struct MovieSimilarData: Decodable, Identifiable, Hashable {
     var id: Int?
     var posterPath, releaseDate, title: String?
     

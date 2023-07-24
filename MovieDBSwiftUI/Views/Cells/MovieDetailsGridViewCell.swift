@@ -34,6 +34,8 @@ struct MovieDetailsGridViewCell: View {
                         .background(.gray.opacity(0.6))
                 }
                 .resizable()
+                .indicator(.activity)
+                .transition(.fade)
                 .aspectRatio(contentMode: .fill)
                 .frame(width: 120, height: 140)
                 .clipped()
@@ -63,6 +65,8 @@ struct MovieDetailsGridViewCell: View {
                     .background(.gray.opacity(0.5))
             }
             .resizable()
+            .indicator(.activity)
+            .transition(.fade)
             .aspectRatio(contentMode: .fill)
             .frame(width: 80, height: 80)
             .cornerRadius(40)

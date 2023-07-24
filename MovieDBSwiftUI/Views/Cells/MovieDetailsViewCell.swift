@@ -28,6 +28,7 @@ struct MovieDetailsViewCell: View {
             MovieDetailsTitle()
             MovieDetailsDesc()
         }
+        .frame(maxWidth: .infinity)
         .background(.white)
     }
     

@@ -9,26 +9,28 @@ import Foundation
 import CoreData
 
 
-struct MovieListModel: Codable {
-    var dates: MoviesDates
-    var page: Int
-    var results: [MovieListData]
-    var totalPages, totalResults: Int
+struct MovieListModel: Decodable, Hashable {
+    var dates: MoviesDates?
+    var page: Int?
+    var results: [MovieListData]?
+    var totalPages, totalResults: Int?
     
     enum CodingKeys: String, CodingKey {
-        case dates, page, results
+        case dates = "dates"
+        case page = "page"
+        case results = "results"
         case totalPages = "total_pages"
         case totalResults = "total_results"
     }
 }
 
 // MARK: - Dates
-struct MoviesDates: Codable {
-    let maximum, minimum: String
+struct MoviesDates: Decodable, Hashable {
+    let maximum, minimum: String?
 }
 
 // MARK: - Result
-struct MovieListData: Codable {
+struct MovieListData: Decodable, Identifiable, Hashable {
     var id: Int?
     var posterPath, releaseDate, title: String?
     var voteAverage: Double?
@@ -44,10 +46,10 @@ struct MovieListData: Codable {
     }
 }
 
-struct MovieSearchModel: Codable {
+struct MovieSearchModel: Decodable, Hashable {
     var page: Int?
-    var results: [MovieSearchData]
-    var totalPages, totalResults: Int
+    var results: [MovieSearchData]?
+    var totalPages, totalResults: Int?
     
     enum CodingKeys: String, CodingKey {
         case page, results
@@ -56,7 +58,7 @@ struct MovieSearchModel: Codable {
     }
 }
 
-struct MovieSearchData: Codable {
+struct MovieSearchData: Decodable, Identifiable, Hashable {
     var id: Int?
     var posterPath, title: String?
     

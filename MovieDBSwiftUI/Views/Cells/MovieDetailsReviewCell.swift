@@ -27,7 +27,7 @@ struct MovieDetailsReviewCell: View {
                     .padding(.trailing, 15)
                 Divider()
                 NavigationLink(destination: {
-                    MovieReviewDetails(movieId: self.movieId)
+                    MovieReviewDetails(movieReview: self.movieReview ?? [])
                 }, label: {
                     Text("View All Reviews")
                         .font(.caption)

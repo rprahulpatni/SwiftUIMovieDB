@@ -58,7 +58,6 @@ extension DateFormatter {
             return "\(remainingMinutes)min"
         }
     }
-    
 }
 
 extension UIImage {

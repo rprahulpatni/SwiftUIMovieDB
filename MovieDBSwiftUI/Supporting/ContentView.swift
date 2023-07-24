@@ -7,16 +7,18 @@
 
 import SwiftUI
 
+//Works as Splash screen or app entry point
 struct ContentView: View {
     @State private var isLogoAnimated = false
     @State private var showMainView = false
+    
     var body: some View {
         ZStack {
             Color.white // Set your desired background color for the splash screen
             if showMainView {
                 MovieList()
             }
-            // Your logo image or custom view
+            //Showing Image view with animation, scale effect and transitions
             Image("logo")
                 .scaleEffect(isLogoAnimated ? 1.5 : 1.0)
                 .opacity(isLogoAnimated ? 0.0 : 1.0)

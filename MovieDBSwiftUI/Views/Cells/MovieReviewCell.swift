@@ -41,6 +41,8 @@ struct MovieReviewCell: View {
                     .background(.gray.opacity(0.5))
             }
             .resizable()
+            .indicator(.activity)
+            .transition(.fade)
             .aspectRatio(contentMode: .fill)
             .frame(width: 40, height: 40)
             .cornerRadius(20)
@@ -49,8 +51,6 @@ struct MovieReviewCell: View {
             Text(movieReview?.authorDetails?.username?.capitalized ?? "NA")
                 .font(.caption)
         }
-        //        .padding(.top, 10)
-        //        .padding(.leading, 15)
     }
 }
 

@@ -31,7 +31,10 @@ struct SearchMovie: View {
                         LazyVGrid(columns: gridVLayout) {
                             ForEach(viewModel.arrMovieList, id: \.id) { item in
                                 NavigationLink{
-                                    MovieDetails(movieId: item.id ?? 0, isFromSearch: true, movieSearchData: item)
+                                    MovieDetails(movieId: item.id ?? 0)
+                                        .onDisappear{
+                                            self.saveSearch(item: item)
+                                        }
                                 } label: {
                                     SearchUI(item: item)
                                 }
@@ -49,7 +52,10 @@ struct SearchMovie: View {
                                 ForEach(recentSearches, id: \.id) { item in
                                     let movie = MovieSearchData(id: Int(item.id), posterPath: item.posterPath, title: item.title)
                                     NavigationLink{
-                                        MovieDetails(movieId: Int(item.id), isFromSearch: false, movieSearchData: nil)
+                                        MovieDetails(movieId: Int(item.id))
+                                            .onDisappear{
+                                                self.saveSearch(item: movie)
+                                            }
                                     } label: {
                                         SearchUI(item: movie)
                                     }
@@ -122,6 +128,28 @@ struct SearchMovie: View {
         .cornerRadius(10)
         .shadow(radius: 5)
         .padding(EdgeInsets(top: 5, leading: 10, bottom: 5, trailing: 10))
+    }
+    
+    //     Function to save search text as a new SearchItem entity in Core Data
+    private func saveSearch(item: MovieSearchData) {
+        withAnimation {
+            do {
+                let newSearch = SearchedMovie(context: viewContext)
+                newSearch.timestamp = Date()
+                newSearch.id = Int64(item.id ?? 0)
+                newSearch.title = item.title
+                newSearch.posterPath = item.posterPath
+                
+                // Optional: If you want to limit the number of recent searches to 5, remove the oldest one
+                if recentSearches.count >= 5 {
+                    viewContext.delete(recentSearches.last!)
+                }
+                try viewContext.save()
+            } catch {
+                // Handle the error
+                print("Error saving search: \(error)")
+            }
+        }
     }
 }
 

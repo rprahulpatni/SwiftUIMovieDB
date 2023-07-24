@@ -11,54 +11,52 @@ import Combine
 public typealias JSON = [String: Any]
 public typealias HTTPHeaders = [String: String]
 
-public enum RequestMethod: String {
+public enum HTTPMethod: String {
     case get = "GET"
+    case head = "HEAD"
     case post = "POST"
     case put = "PUT"
     case delete = "DELETE"
+    case connect = "CONNECT"
 }
 
-//public enum Result<Value> {
-//    case success(Value)
-//    case failure(Error)
-//}
-
-class NetworkManager {
-    static let shared = NetworkManager()
-    private init(){}
+class NetworkManager <T: Decodable> {
+    struct NetworkModel{
+        let url: URL?
+        let method: HTTPMethod
+        let body: JSON? = nil
+    }
     
-//    func callAPI<T: Decodable>(for: T.Type = T.self, urlString: URL, method: RequestMethod, headers: HTTPHeaders? = nil, body: JSON? = nil, completion: @escaping (Result <T>) -> Void) {
-//
-//        var urlRequest = URLRequest(url: urlString)
-//        urlRequest.httpMethod = method.rawValue
-//
-//        if let headers = headers {
-//            urlRequest.allHTTPHeaderFields = headers
-//            urlRequest.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
-//        }
-//
-//        if let body = body {
-//            urlRequest.httpBody = try? JSONSerialization.data(withJSONObject: body)
-//        }
-//
-//        let session = URLSession(configuration: .default)
-//        let task = session.dataTask(with: urlRequest) { data, response, error in
-//            if let err = error {
-//                completion(.failure(err.localizedDescription as! Error))
-//            }
-//            do {
-//                let decoder = JSONDecoder()
-//                try completion(.success(decoder.decode(T.self, from: data!)))
-//            } catch let decodingError {
-//                completion(.failure(decodingError))
-//            }
-//        }
-//        task.resume()
-//    }
+    static var shared: NetworkManager<T> {
+        return NetworkManager<T>()
+    }
     
-    func callAPI<T: Decodable>(for: T.Type = T.self, urlString: URL) -> AnyPublisher<T, Error> {
-        return URLSession.shared.dataTaskPublisher(for: urlString)
-            .map(\.data)
+    private init() {}
+    
+    /// Request the API data with parameters (T is a decodable model).
+    /// - Parameters:
+    ///   - model: Data that can be helpful for the request model.
+    func callAPI(with model: NetworkModel) -> AnyPublisher<T, Error> {
+        guard let url = model.url else {
+            return Fail(error: NSError(domain: "Missing API URL", code: -10001, userInfo: nil)).eraseToAnyPublisher()
+        }
+        let requestHeaders: [String: String] = ["Content-Type": "application/x-www-form-urlencoded"]
+        
+        var urlRequest = URLRequest(url: url)
+        urlRequest.httpMethod = model.method.rawValue
+        urlRequest.allHTTPHeaderFields = requestHeaders
+        
+        if let body = model.body {
+            urlRequest.httpBody = try? JSONSerialization.data(withJSONObject: body)
+        }
+        
+        return URLSession.shared.dataTaskPublisher(for: urlRequest)
+            .tryMap({ data, response in
+                guard let httpResponse = response as? HTTPURLResponse, 200..<300 ~= httpResponse.statusCode else {
+                    throw URLError(.badServerResponse)
+                }
+                return data
+            })
             .decode(type: T.self, decoder: JSONDecoder())
             .receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()

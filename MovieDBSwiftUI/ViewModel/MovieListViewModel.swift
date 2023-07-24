@@ -12,7 +12,6 @@ class MovieListViewModel: ObservableObject {
     @Published var arrMovieList: Array<MovieListData> = Array<MovieListData>()
     @Published var isLoading: Bool = false
     
-    //    private var resources : MovieListResources = MovieListResources()
     var totalPages: Int = 0
     var pageCount: Int = 1
     private var cancellables = Set<AnyCancellable>()
@@ -39,9 +38,8 @@ class MovieListViewModel: ObservableObject {
         if showLoader {
             self.isLoading = true
         }
-        let strURL = URLEndpoints.getMovieList + "\(pageCount)"
-        print(strURL)
-        NetworkManager.shared.callAPI(for: MovieListModel.self, urlString: URL(string: strURL)!)
+        MovieListDataProvider.shared.getMovieList(pageCount)
+        MovieListDataProvider.shared.arrMovieListData
             .sink(receiveCompletion: { completion in
                 switch completion {
                 case .finished:
@@ -51,9 +49,9 @@ class MovieListViewModel: ObservableObject {
                     self.isLoading = false
                 }
             }, receiveValue: { movieList in
-                self.arrMovieList.append(contentsOf: movieList.results.sorted(by: {$0.voteAverage! > $1.voteAverage!}))
-                self.totalPages = movieList.totalPages
-                self.pageCount += 1//movieList.page
+                self.arrMovieList.append(contentsOf: movieList.results!.sorted(by: {$0.voteAverage! > $1.voteAverage!}))
+                self.totalPages = movieList.totalPages ?? 0
+                self.pageCount += 1
                 self.isLoading = false
             })
             .store(in: &cancellables)
