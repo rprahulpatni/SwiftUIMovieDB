@@ -17,6 +17,7 @@ struct MovieReviewCell: View {
             ReviewAuthorsDetails()
             Text(movieReview?.content ?? "")
                 .font(.caption)
+                .foregroundColor(.black)
                 .lineLimit(isExpanded == true ? 1000 : 5)
             Button(action: {
                 isExpanded.toggle()
@@ -51,11 +52,7 @@ struct MovieReviewCell: View {
             Text(movieReview?.authorDetails?.username?.capitalized ?? "NA")
                 .font(.caption)
         }
+        .foregroundColor(.black)
     }
 }
 
-struct MovieReviewCell_Previews: PreviewProvider {
-    static var previews: some View {
-        MovieReviewCell()
-    }
-}

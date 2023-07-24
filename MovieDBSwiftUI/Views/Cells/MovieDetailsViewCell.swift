@@ -53,6 +53,7 @@ struct MovieDetailsViewCell: View {
                 Text(String(format: "%0.1f", movieDetails.voteAverage ?? 0) + "/10")
                     .font(.footnote)
             }
+            .foregroundColor(.black)
             .offset(y: 40)
             .padding(.top, 40)
         }

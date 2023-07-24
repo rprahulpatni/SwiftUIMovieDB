@@ -18,8 +18,10 @@ struct MovieReviewDetails: View {
         VStack(alignment: .leading, spacing: 10) {
             List(self.movieReview, id: \.id) { item in
                 MovieReviewCell(movieReview: item)
+                    .listRowBackground(Color.white)
             }
             .listStyle(.plain)
+            .scrollIndicators(.hidden)
         }
         .navigationBarTitle("Reviews", displayMode: .inline)
         .navigationBarBackButtonHidden()
