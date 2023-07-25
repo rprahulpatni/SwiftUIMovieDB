@@ -19,7 +19,7 @@ struct SplashView: View {
                 MovieList()
             }
             //Showing Image view with animation, scale effect and transitions
-            Image("logo")
+            Image(StringConstants.placeholderImageLogo)
                 .scaleEffect(isLogoAnimated ? 1.5 : 1.0)
                 .opacity(isLogoAnimated ? 0.0 : 1.0)
                 .onAppear {

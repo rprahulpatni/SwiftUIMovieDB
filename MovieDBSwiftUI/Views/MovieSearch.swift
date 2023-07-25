@@ -59,7 +59,7 @@ struct MovieSearch: View {
                 } else {
                     //For displaying Recently Searched movies from coredata
                     if recentSearches.count > 0 {
-                        Text("Recently Searched")
+                        Text(StringConstants.sectionHeaderRecentlySearched)
                             .hAlign(.leading)
                             .padding(.leading, 15)
                         ScrollView(.vertical, showsIndicators: false) {
@@ -80,11 +80,11 @@ struct MovieSearch: View {
                     } else {
                         //For displaying no record found when no movie is stored in coredata
                         VStack(alignment: .center, spacing: 10){
-                            Image(systemName: "magnifyingglass")
+                            Image(systemName: StringConstants.placeholderImageSearch)
                                 .resizable()
                                 .foregroundColor(.gray.opacity(0.3))
                                 .frame(width: 100, height: 100)
-                            Text("No Result Found!!")
+                            Text(StringConstants.noRecordFound)
                                 .foregroundColor(.gray.opacity(0.3))
                                 .font(.headline)
                         }
@@ -94,7 +94,7 @@ struct MovieSearch: View {
                     }
                 }
             }//Setting Navigation bar details
-            .navigationBarTitle("Search",displayMode: .inline)
+            .navigationBarTitle(StringConstants.navHeaderMovieSearch,displayMode: .inline)
             //Hiding native navigation back button
             .navigationBarBackButtonHidden()
             //Showing custom back button
@@ -126,7 +126,7 @@ struct MovieSearch: View {
                 //For displaying Movie Image
                 //Using SDWebImageView for displaying image with cache, placeholder
                 let imgUrl = URL(string: imagePath +  "\(item.posterPath ?? "")")
-                CustomSDWebImageView(imgURL: imgUrl, imgWidth: 40, imgHeight: 40, placeholderImage: "film", isCircle: false)
+                CustomSDWebImageView(imgURL: imgUrl, imgWidth: 40, imgHeight: 40, placeholderImage: StringConstants.placeholderImageFilm, isCircle: false)
                 
                 //For displaying Movie Title
                 Text(item.title ?? "")

@@ -26,18 +26,18 @@ struct MovieDetails: View {
                     //Reusable view for displaying Movie Details
                     MovieDetailsViewCell(movieDetails: viewModel.dictMovieDetails)
                     //Reusable view for displaying Movie Cast member list with section header
-                    MovieDetailsSectionWithGridViewCell(categoryName: "Cast", movieSimilar: viewModel.arrSimilarMovieList, movieCastNCrew: viewModel.arrMovieCastList, onTab: { item in
+                    MovieDetailsSectionWithGridViewCell(categoryName: StringConstants.sectionHeaderCast, movieSimilar: viewModel.arrSimilarMovieList, movieCastNCrew: viewModel.arrMovieCastList, onTab: { item in
                     })
                         .background(.white)
                     //Reusable view for displaying Movie Crew member list with section header
-                    MovieDetailsSectionWithGridViewCell(categoryName: "Crew", movieSimilar: viewModel.arrSimilarMovieList, movieCastNCrew: viewModel.arrMovieCrewList, onTab: { item in
+                    MovieDetailsSectionWithGridViewCell(categoryName: StringConstants.sectionHeaderCrew, movieSimilar: viewModel.arrSimilarMovieList, movieCastNCrew: viewModel.arrMovieCrewList, onTab: { item in
                     })
                         .background(.white)
                     //Reusable view for displaying Movie Review with section header
-                    MovieDetailsReviewCell(categoryName: "Reviews", movieId: self.movieId, movieReview: viewModel.arrReviewMovieList)
+                    MovieDetailsReviewCell(categoryName: StringConstants.sectionHeaderReviews, movieId: self.movieId, movieReview: viewModel.arrReviewMovieList)
                         .background(.white)
                     //Reusable view for displaying Movie Similar list with section header
-                    MovieDetailsSectionWithGridViewCell(categoryName: "Similar Results", movieSimilar: viewModel.arrSimilarMovieList, movieCastNCrew: viewModel.arrMovieCrewList, onTab: { item in
+                    MovieDetailsSectionWithGridViewCell(categoryName: StringConstants.sectionHeaderSimilarResults, movieSimilar: viewModel.arrSimilarMovieList, movieCastNCrew: viewModel.arrMovieCrewList, onTab: { item in
                         //Updating movieId for fetching details assosiacted with specified movieID
                         self.movieId = item
                         //Removing all values from array for updating new value
@@ -60,7 +60,7 @@ struct MovieDetails: View {
                 //showProgress is based on ViewModel api response
                 LoadingView(showProgress: $viewModel.isLoading)
             }//Setting Navigation bar details
-            .navigationBarTitle("Movie Detail", displayMode: .inline)
+            .navigationBarTitle(StringConstants.navHeaderMovieDetail,displayMode: .inline)
             //Hiding native navigation back button
             .navigationBarBackButtonHidden()
             //Showing custom back button

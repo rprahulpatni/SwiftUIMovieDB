@@ -26,7 +26,7 @@ struct MovieReviewDetails: View {
             .listStyle(.plain)
             .scrollIndicators(.hidden)
         }//Setting Navigation bar details
-        .navigationBarTitle("Reviews", displayMode: .inline)
+        .navigationBarTitle(StringConstants.navHeaderMovieReview, displayMode: .inline)
         //Hiding native navigation back button
         .navigationBarBackButtonHidden()
         //Showing custom back button

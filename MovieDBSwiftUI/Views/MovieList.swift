@@ -39,7 +39,7 @@ struct MovieList: View {
                             if viewModel.pageCount <= viewModel.totalPages {
                                 //Showing loader
                                 ProgressView(label: {
-                                    Text("Loading")
+                                    Text(StringConstants.loading)
                                 }).progressViewStyle(.circular)
                                     .tint(.gray)
                                     .onAppear(perform: {
@@ -63,13 +63,13 @@ struct MovieList: View {
                 // Fetch data when the view appears.
                 viewModel.getMovieList(true)
             })//Setting Navigation bar details
-            .navigationBarTitle("Movie's List",displayMode: .inline)
+            .navigationBarTitle(StringConstants.navHeaderMovieList,displayMode: .inline)
             //Open if you want to change Navigation header color
             //.navigationBarColor(backgroundColor: .purple, tintColor: .white)
             .toolbar {
                 // Navigate to SearchView on click of Search NavigationLink
                 NavigationLink(destination: MovieSearch()) {
-                    Image(systemName: "magnifyingglass")
+                    Image(systemName: StringConstants.placeholderImageSearch)
                 }
             }
         }

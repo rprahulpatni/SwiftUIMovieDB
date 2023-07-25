@@ -28,7 +28,7 @@ struct MovieReviewCell: View {
                 isExpanded.toggle()
             }, label: {
                 //Button title as per expanded toggle condition
-                Text(isExpanded == true ? "View Less" : "View More")
+                Text(isExpanded == true ? StringConstants.btnViewLess : StringConstants.btnViewMore)
                     .font(.caption2)
                     .foregroundColor(.blue)
                     .hAlign(.trailing)
@@ -46,7 +46,7 @@ struct MovieReviewCell: View {
             //For displaying Movie Image
             //Using SDWebImageView for displaying image with cache, placeholder
             let imgUrl = URL(string: imagePath +  "\(movieReview?.authorDetails?.avatarPath ?? "")")
-            CustomSDWebImageView(imgURL: imgUrl, imgWidth: 40, imgHeight: 40, placeholderImage: "person.circle.fill", isCircle: true)
+            CustomSDWebImageView(imgURL: imgUrl, imgWidth: 40, imgHeight: 40, placeholderImage: StringConstants.placeholderImagePerson, isCircle: true)
             
             //For displaying Movie review author name
             Text(movieReview?.authorDetails?.username?.capitalized ?? "NA")

@@ -31,7 +31,7 @@ struct MovieDetailsViewCell: View {
         //For displaying Movie Image
         //Using SDWebImageView for displaying image with cache, placeholder
         let imgBackdropUrl = URL(string: imagePath +  "\(movieDetails.backdropPath ?? "")")
-        CustomSDWebImageView(imgURL: imgBackdropUrl, imgWidth: 400, imgHeight: 220, placeholderImage: "film", isCircle: false)
+        CustomSDWebImageView(imgURL: imgBackdropUrl, imgWidth: 400, imgHeight: 220, placeholderImage: StringConstants.placeholderImageFilm, isCircle: false)
             .frame(maxWidth: .infinity)
     }
     
@@ -43,7 +43,7 @@ struct MovieDetailsViewCell: View {
             //For displaying Movie Image
             //Using SDWebImageView for displaying image with cache, placeholder
             let imgUrl = URL(string: imagePath +  "\(movieDetails.posterPath ?? "")")
-            CustomSDWebImageView(imgURL: imgUrl, imgWidth: 100, imgHeight: 160, placeholderImage: "film", isCircle: false)
+            CustomSDWebImageView(imgURL: imgUrl, imgWidth: 100, imgHeight: 160, placeholderImage: StringConstants.placeholderImageFilm, isCircle: false)
                 .clipShape(RoundedRectangle(cornerRadius: 5, style: .continuous))
                 .overlay {
                     RoundedRectangle(cornerRadius: 5, style: .continuous)

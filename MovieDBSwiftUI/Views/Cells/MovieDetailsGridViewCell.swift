@@ -14,7 +14,7 @@ struct MovieDetailsGridViewCell: View {
     var categoryName: String = ""
     
     var body: some View {
-        if categoryName == "Similar Results" {
+        if categoryName == StringConstants.sectionHeaderSimilarResults {
             //Displaying data using viewBuilder for similar results
             ViewForSimilarMovies()
         } else {
@@ -32,7 +32,7 @@ struct MovieDetailsGridViewCell: View {
                 //For displaying Movie Image
                 //Using SDWebImageView for displaying image with cache, placeholder
                 let imgUrl = URL(string: imagePath +  "\(movieSimilar?.posterPath ?? "")")
-                CustomSDWebImageView(imgURL: imgUrl, imgWidth: 120, imgHeight: 140, placeholderImage: "film", isCircle: false)
+                CustomSDWebImageView(imgURL: imgUrl, imgWidth: 120, imgHeight: 140, placeholderImage: StringConstants.placeholderImageFilm, isCircle: false)
                 
                 //For creating blur view on movie image
                 Rectangle()
@@ -60,7 +60,7 @@ struct MovieDetailsGridViewCell: View {
             //For displaying Movie Image
             //Using SDWebImageView for displaying image with cache, placeholder
             let imgUrl = URL(string: imagePath +  "\(movieCastNCrew?.profilePath ?? "")")
-            CustomSDWebImageView(imgURL: imgUrl, imgWidth: 80, imgHeight: 80, placeholderImage: "person.circle.fill", isCircle: true)
+            CustomSDWebImageView(imgURL: imgUrl, imgWidth: 80, imgHeight: 80, placeholderImage: StringConstants.placeholderImagePerson, isCircle: true)
                 .clipShape(Circle())
             
             //For displaying name

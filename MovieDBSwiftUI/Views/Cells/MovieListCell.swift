@@ -33,7 +33,7 @@ struct MovieListCell: View {
         //For displaying Movie Image
         //Using SDWebImageView for displaying image with cache, placeholder
         let imgUrl = URL(string: "\(imagePath)" + "\(moviesData.posterPath ?? "")")
-        CustomSDWebImageView(imgURL: imgUrl, imgWidth: 80, imgHeight: 80, placeholderImage: "film", isCircle: false)
+        CustomSDWebImageView(imgURL: imgUrl, imgWidth: 80, imgHeight: 80, placeholderImage: StringConstants.placeholderImageFilm, isCircle: false)
     }
     
     ///@ViewBuilder is a property wrapper that provides a convenient way to construct complex view hierarchies from multiple child views.
@@ -47,7 +47,7 @@ struct MovieListCell: View {
             
             //For displaying Movie release date with calendar image
             HStack {
-                Image(systemName: "calendar")
+                Image(systemName: StringConstants.placeholderImageCalender)
                 let releaseDate = DateFormatter.convertDateString(moviesData.releaseDate ?? "")
                 Text(releaseDate)
             }
@@ -56,8 +56,8 @@ struct MovieListCell: View {
             
             //For displaying Movie votes with total rating with thumbsup image
             HStack {
-                Image(systemName: "hand.thumbsup")
-                Text("\(moviesData.voteCount ?? 0)" + " | Rate: " + String(format: "%0.1f", (moviesData.voteAverage ?? 0.0)) + "/10")
+                Image(systemName: StringConstants.placeholderImageThumbsUp)
+                Text("\(moviesData.voteCount ?? 0)" + StringConstants.rate + String(format: "%0.1f", (moviesData.voteAverage ?? 0.0)) + "/10")
             }
             .font(.caption)
             .foregroundColor(.gray)

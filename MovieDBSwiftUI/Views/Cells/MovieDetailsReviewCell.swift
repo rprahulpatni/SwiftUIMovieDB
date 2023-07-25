@@ -29,14 +29,14 @@ struct MovieDetailsReviewCell: View {
                 NavigationLink(destination: {
                     MovieReviewDetails(movieReview: self.movieReview ?? [])
                 }, label: {
-                    Text("View All Reviews")
+                    Text(StringConstants.btnViewAllReviews)
                         .font(.caption)
                         .frame(height: 40)
                         .frame(maxWidth: .infinity)
                         .padding(.bottom, 5)
                 })
             } else {
-                Text("No Record Found!!")
+                Text(StringConstants.noRecordFound)
                     .hAlign(.leading)
                     .frame(height: 50)
                     .padding(.leading, 15)
