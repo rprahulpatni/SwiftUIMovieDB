@@ -48,7 +48,7 @@ struct MovieListData: Decodable, Identifiable, Hashable {
 
 struct MovieSearchModel: Decodable, Hashable {
     var page: Int?
-    var results: [MovieSearchData]?
+    var results: [MovieSearchData]
     var totalPages, totalResults: Int?
     
     enum CodingKeys: String, CodingKey {
