@@ -14,7 +14,7 @@ MovieDBSwiftUI is a Swift-based iOS application that provides a user-friendly in
 
 | Home Screen                | Movie Details                | Movie Details              | Movie Reviews                | Movie Search                 |
 | :------------------------: | :--------------------------: | :------------------------: | :--------------------------: | :--------------------------: |
-| ![Home Screen](MovieList.png) | ![Movie Details](MovieDetailsOne.png) | ![Movie Details](MovieDetailsTwo.png) | ![Movie Details](MovieReviewList.png) |  ![Movie Details](MovieSearch.png) |
+| ![Home Screen](ScreenShots/ML.png) | ![Movie Details](ScreenShots/MDO.png) | ![Movie Details](ScreenShots/MDT.png) | ![Movie Details](ScreenShots/MRL.png) |  ![Movie Details](ScreenShots/MS.png) |
 
 
 ## SwiftUI
