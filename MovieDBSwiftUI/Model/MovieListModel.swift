@@ -6,8 +6,6 @@
 //
 
 import Foundation
-import CoreData
-
 
 struct MovieListModel: Decodable, Hashable {
     var dates: MoviesDates?
@@ -24,12 +22,12 @@ struct MovieListModel: Decodable, Hashable {
     }
 }
 
-// MARK: - Dates
+// MARK: - MoviesDates
 struct MoviesDates: Decodable, Hashable {
     let maximum, minimum: String?
 }
 
-// MARK: - Result
+// MARK: - MovieListData
 struct MovieListData: Decodable, Identifiable, Hashable {
     var id: Int?
     var posterPath, releaseDate, title: String?
@@ -46,25 +44,3 @@ struct MovieListData: Decodable, Identifiable, Hashable {
     }
 }
 
-struct MovieSearchModel: Decodable, Hashable {
-    var page: Int?
-    var results: [MovieSearchData]
-    var totalPages, totalResults: Int?
-    
-    enum CodingKeys: String, CodingKey {
-        case page, results
-        case totalPages = "total_pages"
-        case totalResults = "total_results"
-    }
-}
-
-struct MovieSearchData: Decodable, Identifiable, Hashable {
-    var id: Int?
-    var posterPath, title: String?
-    
-    enum CodingKeys: String, CodingKey {
-        case id = "id"
-        case posterPath = "poster_path"
-        case title = "title"
-    }
-}

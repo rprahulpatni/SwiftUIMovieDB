@@ -118,6 +118,7 @@ struct MovieSearch: View {
     }
     
     ///@ViewBuilder is a property wrapper that provides a convenient way to construct complex view hierarchies from multiple child views.
+    // ViewBuilder for displaying search details like poster image and title
     @ViewBuilder
     func SearchUI(item: MovieSearchData) -> some View {
         HStack(alignment: .center) {
@@ -125,20 +126,7 @@ struct MovieSearch: View {
                 //For displaying Movie Image
                 //Using SDWebImageView for displaying image with cache, placeholder
                 let imgUrl = URL(string: imagePath +  "\(item.posterPath ?? "")")
-                WebImage(url: imgUrl).placeholder{
-                    Image(systemName: "film")
-                        .resizable()
-                        .foregroundColor(.black)
-                        .frame(width: 40, height: 40)
-                        .background(.gray.opacity(0.5))
-                }
-                .resizable()
-                .indicator(.activity)
-                .transition(.fade)
-                .frame(width: 40, height: 40)
-                .scaledToFit()
-                .background(.gray.opacity(0.5))
-                .clipped()
+                CustomSDWebImageView(imgURL: imgUrl, imgWidth: 40, imgHeight: 40, placeholderImage: "film", isCircle: false)
                 
                 //For displaying Movie Title
                 Text(item.title ?? "")

@@ -39,7 +39,7 @@ struct MovieDetailsReviewCell: View {
                 Text("No Record Found!!")
                     .hAlign(.leading)
                     .frame(height: 50)
-                    .padding(.leading, 10)
+                    .padding(.leading, 15)
                     .padding(.bottom, 10)
             }
         }

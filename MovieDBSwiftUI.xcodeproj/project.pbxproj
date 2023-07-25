@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A1F15842A6FC9B7008B9F3D /* MovieSearchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1F15832A6FC9B6008B9F3D /* MovieSearchModel.swift */; };
+		0A1F15862A6FD003008B9F3D /* CustomSDWebImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1F15852A6FD003008B9F3D /* CustomSDWebImageView.swift */; };
 		0A4A72022A6BEC4500046605 /* CustomBackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4A72012A6BEC4500046605 /* CustomBackButton.swift */; };
 		0A60AF2D2A6E4794006BE2E9 /* NetworkURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A60AF2C2A6E4794006BE2E9 /* NetworkURL.swift */; };
 		0AD230E52A6AAE1400EFD3AA /* MovieDBSwiftUIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD230E42A6AAE1400EFD3AA /* MovieDBSwiftUIApp.swift */; };
@@ -41,6 +43,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0A1F15832A6FC9B6008B9F3D /* MovieSearchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieSearchModel.swift; sourceTree = "<group>"; };
+		0A1F15852A6FD003008B9F3D /* CustomSDWebImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSDWebImageView.swift; sourceTree = "<group>"; };
 		0A4A72002A6BE78200046605 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		0A4A72012A6BEC4500046605 /* CustomBackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomBackButton.swift; sourceTree = "<group>"; };
 		0A60AF2C2A6E4794006BE2E9 /* NetworkURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkURL.swift; sourceTree = "<group>"; };
@@ -184,6 +188,7 @@
 			children = (
 				0AD231052A6AB18300EFD3AA /* MovieListModel.swift */,
 				0AD231232A6AF44100EFD3AA /* MovieDetailsModel.swift */,
+				0A1F15832A6FC9B6008B9F3D /* MovieSearchModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -244,6 +249,7 @@
 			children = (
 				0AD2310B2A6ABEA300EFD3AA /* LoadingView.swift */,
 				0A4A72012A6BEC4500046605 /* CustomBackButton.swift */,
+				0A1F15852A6FD003008B9F3D /* CustomSDWebImageView.swift */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -354,12 +360,14 @@
 				0AD231042A6AB11700EFD3AA /* MovieListDataProvider.swift in Sources */,
 				0AD2311C2A6AEC0900EFD3AA /* MovieDetailsViewModel.swift in Sources */,
 				0A60AF2D2A6E4794006BE2E9 /* NetworkURL.swift in Sources */,
+				0A1F15862A6FD003008B9F3D /* CustomSDWebImageView.swift in Sources */,
 				0AD230E72A6AAE1400EFD3AA /* SplashView.swift in Sources */,
 				0AD231022A6AB0C600EFD3AA /* NetworkManager.swift in Sources */,
 				0AD231092A6AB1E700EFD3AA /* URLEndpoints.swift in Sources */,
 				0AD231282A6B303900EFD3AA /* MovieDetailsReviewCell.swift in Sources */,
 				0AD230FD2A6AB07E00EFD3AA /* MovieList.swift in Sources */,
 				0AD231262A6B0EEB00EFD3AA /* MovieDetailsViewCell.swift in Sources */,
+				0A1F15842A6FC9B7008B9F3D /* MovieSearchModel.swift in Sources */,
 				0AD231142A6AE51000EFD3AA /* Helper.swift in Sources */,
 				0AD230E52A6AAE1400EFD3AA /* MovieDBSwiftUIApp.swift in Sources */,
 				0AD231202A6AEF7200EFD3AA /* MovieDetailsSectionWithGridViewCell.swift in Sources */,

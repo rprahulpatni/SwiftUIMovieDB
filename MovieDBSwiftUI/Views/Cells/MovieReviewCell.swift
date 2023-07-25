@@ -38,6 +38,7 @@ struct MovieReviewCell: View {
         }
     }
     
+    ///@ViewBuilder is a property wrapper that provides a convenient way to construct complex view hierarchies from multiple child views.
     // ViewBuilder for displaying author details
     @ViewBuilder
     func ReviewAuthorsDetails()-> some View {
@@ -45,18 +46,7 @@ struct MovieReviewCell: View {
             //For displaying Movie Image
             //Using SDWebImageView for displaying image with cache, placeholder
             let imgUrl = URL(string: imagePath +  "\(movieReview?.authorDetails?.avatarPath ?? "")")
-            WebImage(url: imgUrl).placeholder{
-                Image(systemName: "person.circle.fill")
-                    .resizable()
-                    .background(.gray.opacity(0.5))
-            }
-            .resizable()
-            .indicator(.activity)
-            .transition(.fade)
-            .aspectRatio(contentMode: .fill)
-            .frame(width: 40, height: 40)
-            .cornerRadius(20)
-            .clipShape(Circle())
+            CustomSDWebImageView(imgURL: imgUrl, imgWidth: 40, imgHeight: 40, placeholderImage: "person.circle.fill", isCircle: true)
             
             //For displaying Movie review author name
             Text(movieReview?.authorDetails?.username?.capitalized ?? "NA")

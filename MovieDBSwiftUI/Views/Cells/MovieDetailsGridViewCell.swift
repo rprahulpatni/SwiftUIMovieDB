@@ -15,34 +15,31 @@ struct MovieDetailsGridViewCell: View {
     
     var body: some View {
         if categoryName == "Similar Results" {
+            //Displaying data using viewBuilder for similar results
             ViewForSimilarMovies()
         } else {
+            //Displaying data using viewBuilder for cast n crew
             ViewForCastNCrew()
         }
     }
     
+    ///@ViewBuilder is a property wrapper that provides a convenient way to construct complex view hierarchies from multiple child views.
+    // ViewBuilder for displaying similar movie details like image and title
     @ViewBuilder
     func ViewForSimilarMovies() -> some View {
         VStack(alignment: .center,spacing: 20) {
             ZStack(alignment: .bottom) {
+                //For displaying Movie Image
+                //Using SDWebImageView for displaying image with cache, placeholder
                 let imgUrl = URL(string: imagePath +  "\(movieSimilar?.posterPath ?? "")")
-                WebImage(url: imgUrl).placeholder{
-                    Image(systemName: "film")
-                        .resizable()
-                        .foregroundColor(.black)
-                        .frame(width: 120, height: 140)
-                        .background(.gray.opacity(0.6))
-                }
-                .resizable()
-                .indicator(.activity)
-                .transition(.fade)
-                .aspectRatio(contentMode: .fill)
-                .frame(width: 120, height: 140)
-                .clipped()
+                CustomSDWebImageView(imgURL: imgUrl, imgWidth: 120, imgHeight: 140, placeholderImage: "film", isCircle: false)
                 
+                //For creating blur view on movie image
                 Rectangle()
                     .foregroundColor(Color.black)
                     .opacity(0.5)
+                
+                //For displaying title
                 Text(movieSimilar?.title ?? "")
                     .font(.caption)
                     .foregroundColor(.white)
@@ -55,22 +52,18 @@ struct MovieDetailsGridViewCell: View {
             .padding(.bottom, 20)
     }
     
+    ///@ViewBuilder is a property wrapper that provides a convenient way to construct complex view hierarchies from multiple child views.
+    // ViewBuilder for displaying cast n crew details like image and title
     @ViewBuilder
     func ViewForCastNCrew() -> some View {
         VStack(alignment: .center,spacing: 10) {
+            //For displaying Movie Image
+            //Using SDWebImageView for displaying image with cache, placeholder
             let imgUrl = URL(string: imagePath +  "\(movieCastNCrew?.profilePath ?? "")")
-            WebImage(url: imgUrl).placeholder{
-                Image(systemName: "person.circle.fill")
-                    .resizable()
-                    .background(.gray.opacity(0.5))
-            }
-            .resizable()
-            .indicator(.activity)
-            .transition(.fade)
-            .aspectRatio(contentMode: .fill)
-            .frame(width: 80, height: 80)
-            .cornerRadius(40)
-            .clipShape(Circle())
+            CustomSDWebImageView(imgURL: imgUrl, imgWidth: 80, imgHeight: 80, placeholderImage: "person.circle.fill", isCircle: true)
+                .clipShape(Circle())
+            
+            //For displaying name
             Text(movieCastNCrew?.name ?? "")
                 .font(.caption)
                 .foregroundColor(.gray)

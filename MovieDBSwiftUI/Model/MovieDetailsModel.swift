@@ -7,7 +7,7 @@
 
 import Foundation
 
-// MARK: - Welcome
+// MARK: - MovieDetailsModel
 struct MovieDetailsModel: Decodable, Hashable {
     var id: Int?
     var backdropPath: String?
@@ -41,7 +41,7 @@ struct Genre: Decodable, Hashable {
     let name: String?
 }
 
-// MARK: - Welcome
+// MARK: - MovieCastNCrewModel
 struct MovieCastNCrewModel: Decodable, Identifiable, Hashable {
     var id: Int?
     var cast, crew: [MovieCastNCrewData]
@@ -103,17 +103,14 @@ struct MovieReviewsData: Decodable, Hashable {
 // MARK: - AuthorDetails
 struct AuthorDetails: Decodable, Hashable {
     var name, username, avatarPath: String?
-//    var rating: Int?
     
     enum CodingKeys: String, CodingKey {
         case name = "name"
         case username = "username"
         case avatarPath = "avatar_path"
-//        case rating = "rating"
     }
 }
 
-////////////
 // MARK: - Similar Movies
 struct MovieSimilarModel: Decodable, Hashable {
     var page: Int?
@@ -127,7 +124,7 @@ struct MovieSimilarModel: Decodable, Hashable {
     }
 }
 
-// MARK: - Result
+// MARK: - MovieSimilarData
 struct MovieSimilarData: Decodable, Identifiable, Hashable {
     var id: Int?
     var posterPath, releaseDate, title: String?

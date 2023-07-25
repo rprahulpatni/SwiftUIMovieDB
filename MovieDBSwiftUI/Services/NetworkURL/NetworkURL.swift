@@ -6,6 +6,7 @@
 //
 
 import Foundation
+//Dummy URL
 //    static let getMovieList = "https://api.themoviedb.org/3/movie/now_playing?api_key=\(apikey)&page="
 //    static let getMovieDetails = "https://api.themoviedb.org/3/movie/"
 //    static let getMovieDetailsCastNCrew = "https://api.themoviedb.org/3/movie/\(movieId)/credits?api_key=\(apikey)"

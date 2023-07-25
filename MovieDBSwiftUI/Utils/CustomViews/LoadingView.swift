@@ -13,9 +13,11 @@ struct LoadingView: View {
         ZStack{
             if showProgress {
                 Group{
+                    //Displaying blur view below loader view
                     Rectangle()
                         .fill(.black.opacity(0.25))
                         .ignoresSafeArea()
+                    //Loader view with rounded rectangle
                     ProgressView()
                         .padding(15)
                         .background(.white, in: RoundedRectangle(cornerRadius: 10, style: .continuous))

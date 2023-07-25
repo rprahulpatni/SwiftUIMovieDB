@@ -13,32 +13,37 @@ struct MovieDetailsViewCell: View {
     
     var body: some View {
         VStack{
-            let imgBackdropUrl = URL(string: imagePath +  "\(movieDetails.backdropPath ?? "")")
-            WebImage(url: imgBackdropUrl).placeholder{
-                Image(systemName: "film")
-                    .resizable()
-                    .foregroundColor(.black)
-                    .frame(height: 220)
-                    .frame(maxWidth: .infinity)
-                    .background(.gray.opacity(0.5))
-            }
-                .resizable()
-                .frame(height: 220)
-                .frame(maxWidth: .infinity)
+            //Displaying backdrop image using viewBuilder
+            MovieDetailsBackDropImage()
+            //Displaying title and other details using viewBuilder
             MovieDetailsTitle()
+            //Displaying description and other details using viewBuilder
             MovieDetailsDesc()
         }
         .frame(maxWidth: .infinity)
         .background(.white)
     }
     
+    ///@ViewBuilder is a property wrapper that provides a convenient way to construct complex view hierarchies from multiple child views.
+    // ViewBuilder for displaying backdrop image on header
+    @ViewBuilder
+    func MovieDetailsBackDropImage()-> some View {
+        //For displaying Movie Image
+        //Using SDWebImageView for displaying image with cache, placeholder
+        let imgBackdropUrl = URL(string: imagePath +  "\(movieDetails.backdropPath ?? "")")
+        CustomSDWebImageView(imgURL: imgBackdropUrl, imgWidth: 400, imgHeight: 220, placeholderImage: "film", isCircle: false)
+            .frame(maxWidth: .infinity)
+    }
+    
+    ///@ViewBuilder is a property wrapper that provides a convenient way to construct complex view hierarchies from multiple child views.
+    // ViewBuilder for displaying other details like poster image, title and vote count
     @ViewBuilder
     func MovieDetailsTitle()-> some View {
         HStack(alignment: .top,spacing: 10){
+            //For displaying Movie Image
+            //Using SDWebImageView for displaying image with cache, placeholder
             let imgUrl = URL(string: imagePath +  "\(movieDetails.posterPath ?? "")")
-            WebImage(url: imgUrl)
-                .resizable()
-                .frame(width: 100,height: 160)
+            CustomSDWebImageView(imgURL: imgUrl, imgWidth: 100, imgHeight: 160, placeholderImage: "film", isCircle: false)
                 .clipShape(RoundedRectangle(cornerRadius: 5, style: .continuous))
                 .overlay {
                     RoundedRectangle(cornerRadius: 5, style: .continuous)
@@ -46,6 +51,7 @@ struct MovieDetailsViewCell: View {
                 }
                 .shadow(radius: 5)
             
+            //For displaying title with vote count
             HStack(spacing: 10) {
                 Text(movieDetails.title ?? "")
                     .font(.headline)
@@ -63,6 +69,8 @@ struct MovieDetailsViewCell: View {
         .padding(.bottom, -80)
     }
     
+    ///@ViewBuilder is a property wrapper that provides a convenient way to construct complex view hierarchies from multiple child views.
+    // ViewBuilder for displaying other details like movie type, releasedate, total hours, and description
     @ViewBuilder
     func MovieDetailsDesc()-> some View {
         let genreNames = movieDetails.genres?.compactMap { genre in
@@ -82,9 +90,3 @@ struct MovieDetailsViewCell: View {
         .padding(.all,15)
     }
 }
-
-//struct MovieDetailsViewCell_Previews: PreviewProvider {
-//    static var previews: some View {
-//        MovieDetailsViewCell()
-//    }
-//}

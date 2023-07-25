@@ -26,33 +26,26 @@ struct MovieListCell: View {
         .padding(EdgeInsets(top: 5, leading: 10, bottom: 5, trailing: 10))
     }
     
-    //Created ViewBuilder for Image View
+    ///@ViewBuilder is a property wrapper that provides a convenient way to construct complex view hierarchies from multiple child views.
+    // ViewBuilder for displaying imageview
     @ViewBuilder
     func MovieImageView() -> some View {
+        //For displaying Movie Image
+        //Using SDWebImageView for displaying image with cache, placeholder
         let imgUrl = URL(string: "\(imagePath)" + "\(moviesData.posterPath ?? "")")
-        WebImage(url: imgUrl).placeholder{
-            Image(systemName: "film")
-                .resizable()
-                .foregroundColor(.black)
-                .frame(width: 80, height: 80)
-                .background(.gray.opacity(0.6))
-        }
-        .resizable()
-        .indicator(.activity)
-        .transition(.fade)
-//        .aspectRatio(contentMode: .fill)
-        .frame(width: 80, height: 80)
-        .scaledToFit()
-        .clipped()
-        .background(.gray.opacity(0.6))
+        CustomSDWebImageView(imgURL: imgUrl, imgWidth: 80, imgHeight: 80, placeholderImage: "film", isCircle: false)
     }
     
-    //Created ViewBuilder for Other Details View
+    ///@ViewBuilder is a property wrapper that provides a convenient way to construct complex view hierarchies from multiple child views.
+    // ViewBuilder for displaying other details
     @ViewBuilder
     func MovieDetailsView() -> some View {
         VStack(alignment: .leading, spacing: 05){
+            //For displaying Movie Title
             Text("\(moviesData.title ?? "")").fontWeight(.semibold).lineLimit(1)
                 .foregroundColor(.black)
+            
+            //For displaying Movie release date with calendar image
             HStack {
                 Image(systemName: "calendar")
                 let releaseDate = DateFormatter.convertDateString(moviesData.releaseDate ?? "")
@@ -60,6 +53,8 @@ struct MovieListCell: View {
             }
             .font(.caption)
             .foregroundColor(.gray)
+            
+            //For displaying Movie votes with total rating with thumbsup image
             HStack {
                 Image(systemName: "hand.thumbsup")
                 Text("\(moviesData.voteCount ?? 0)" + " | Rate: " + String(format: "%0.1f", (moviesData.voteAverage ?? 0.0)) + "/10")

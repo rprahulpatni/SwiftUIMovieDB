@@ -17,6 +17,7 @@ struct MovieDetailsSectionWithGridViewCell: View {
     
     var body: some View {
         VStack(alignment: .leading) {
+            //For displaying Category Name
             Text(categoryName)
                 .font(.headline)
                 .foregroundColor(.gray)
@@ -25,18 +26,15 @@ struct MovieDetailsSectionWithGridViewCell: View {
             Divider()
             ScrollView(.horizontal, showsIndicators: false){
                 LazyHGrid(rows: gridHLayout, alignment: .center, spacing: 10) {
+                    //For displaying Similar Results data
                     if categoryName == "Similar Results" {
                         if movieSimilar.count > 0 {
                             ForEach(movieSimilar, id: \.id) { item in
+                                //Reusable view for displaying Similar results with category name
                                 MovieDetailsGridViewCell(movieSimilar: item, movieCastNCrew: nil, categoryName: self.categoryName)
                                     .onTapGesture {
                                         self.onTab(item.id ?? 0)
                                     }
-//                                NavigationLink(destination: {
-//                                    MovieDetails(movieId: item.id ?? 0,isFromSearch: false, movieSearchData: nil)
-//                                }, label: {
-//                                    MovieDetailsGridViewCell(movieSimilar: item, movieCastNCrew: nil, categoryName: self.categoryName)
-//                                })
                             }
                         } else {
                             Text("No Record Found!!")
@@ -45,8 +43,10 @@ struct MovieDetailsSectionWithGridViewCell: View {
                                 .padding(.bottom, 10)
                         }
                     } else {
+                        //For displaying Cast n Crew data
                         if movieCastNCrew.count > 0 {
                             ForEach(movieCastNCrew, id: \.id) { item in
+                                //Reusable view for displaying Cast n Crew with category name
                                 MovieDetailsGridViewCell(movieSimilar: nil, movieCastNCrew: item, categoryName: self.categoryName)
                             }
                         } else {

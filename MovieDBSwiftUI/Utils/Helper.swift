@@ -9,12 +9,14 @@ import Foundation
 import UIKit
 import SwiftUI
 
+//MARK: - String extension
 extension String {
     public var trimmed: String {
         return trimmingCharacters(in: .whitespacesAndNewlines)
     }
 }
 
+//MARK: - DateFormatter extension
 extension DateFormatter {
     static var longDateFormatter: DateFormatter {
         let formatter = DateFormatter()
@@ -60,6 +62,7 @@ extension DateFormatter {
     }
 }
 
+//MARK: - UIImage extension
 extension UIImage {
     func aspectFittedToHeight(imageSize : CGSize) -> UIImage {
         let renderer = UIGraphicsImageRenderer(size: imageSize)
@@ -84,7 +87,7 @@ extension UIImage {
     }
 }
 
-//MARK: View Extension for UI Building
+//MARK: - View Extension for UI Building
 extension View {
     func closeAllKeyboards() {
         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
@@ -131,6 +134,7 @@ extension View {
     }
 }
 
+//MARK: - NavigationBar color modifier for custom color
 struct NavigationBarColorModifier: ViewModifier {
     var backgroundColor: UIColor
     var tintColor: UIColor
