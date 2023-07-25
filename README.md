@@ -93,6 +93,7 @@ MovieDBSwiftUI/
 |   |   |-- MovieList
 |   |   |-- MovieDetails
 |   |   |-- MovieSearch
+|   |   |-- MovieReviewDetails
 |-- ViewModel/
 |   |-- MovieListViewModel
 |   |-- MovieDetailsViewModel
@@ -100,6 +101,7 @@ MovieDBSwiftUI/
 |-- Model/
 |   |-- MovieListModel
 |   |-- MovieDetailsModel
+|   |-- MovieSearchModel
 |-- Services/
 |   |-- NetworkURL/
 |   |-- URLEndpoints/
@@ -111,6 +113,7 @@ MovieDBSwiftUI/
 |-- Utils/
 |   |-- CustomViews/
 |   |-- Helper
+|   |-- StringConstants
 |-- Resources/
 |   |-- Assets.xcassets
 |-- Preview Content/
@@ -122,7 +125,7 @@ MovieDBSwiftUI/
 
 - **AppEntry:** Contains SwiftUI views for the main app entry points.
   
-- **View:** It includes `SplashView`, `MovieList`, `MovieDetails`, and `MovieSearch` views.
+- **View:** It includes `SplashView`, `MovieList`, `MovieDetails`, `MovieSearch` and `MovieReviewDetails` views.
 
 - **ViewModel:** Contains view models for handling business logic and data operations. It includes `MovieListViewModel`, `MovieDetailsViewModel`, and `MovieSearchViewModel`.
 
