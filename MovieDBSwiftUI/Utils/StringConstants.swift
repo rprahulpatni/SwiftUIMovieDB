@@ -23,7 +23,8 @@ struct StringConstants {
     static let btnViewLess = "View Less"
     static let btnViewMore = "View More"
     static let btnViewAllReviews = "View All Reviews"
-    
+    static let btnViewLessReviews = "View Less Reviews"
+
     static let sectionHeaderCast = "Cast"
     static let sectionHeaderCrew = "Crew"
     static let sectionHeaderReviews = "Reviews"

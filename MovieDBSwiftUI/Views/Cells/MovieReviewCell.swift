@@ -14,27 +14,32 @@ struct MovieReviewCell: View {
     @State private var isExpanded: Bool = false
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 10){
-            //For displaying review author details
-            ReviewAuthorsDetails()
-            //For displaying review content
-            Text(movieReview?.content ?? "")
-                .font(.caption)
-                .foregroundColor(.black)
-                .lineLimit(isExpanded == true ? 1000 : 5)
-            //Button for showing review content in full and limited
-            Button(action: {
-                //Handlling isExpanded toggle condition
-                isExpanded.toggle()
-            }, label: {
-                //Button title as per expanded toggle condition
-                Text(isExpanded == true ? StringConstants.btnViewLess : StringConstants.btnViewMore)
-                    .font(.caption2)
-                    .foregroundColor(.blue)
-                    .hAlign(.trailing)
-                    .padding(.leading)
-            })
-            .frame(height: 20)
+        VStack {
+            VStack(alignment: .leading, spacing: 10){
+                //For displaying review author details
+                ReviewAuthorsDetails()
+                //For displaying review content
+                Text(movieReview?.content ?? "")
+                    .font(.caption)
+                    .foregroundColor(.black)
+                    .lineLimit(isExpanded == true ? 1000 : 5)
+                //Button for showing review content in full and limited
+                Button(action: {
+                    //Handlling isExpanded toggle condition
+                    isExpanded.toggle()
+                }, label: {
+                    //Button title as per expanded toggle condition
+                    Text(isExpanded == true ? StringConstants.btnViewLess : StringConstants.btnViewMore)
+                        .font(.caption2)
+                        .foregroundColor(.blue)
+                        .hAlign(.trailing)
+                        .padding(.leading)
+                })
+                .frame(height: 20)
+            }
+            .padding(.leading, 15)
+            .padding(.trailing, 15)
+            Divider()
         }
     }
     
