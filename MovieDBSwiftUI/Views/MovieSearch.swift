@@ -7,27 +7,15 @@
 
 import SwiftUI
 import SDWebImageSwiftUI
-import CoreData
 
 struct MovieSearch: View {
     // MARK: - Properties
     /// ObservedObject: A property wrapper type that subscribes to an observable object and invalidates a view whenever the observable object changes.
     /// The ViewModel responsible for data flow in this view.
-    @ObservedObject var viewModel: MovieSearchViewModel = MovieSearchViewModel()
-    ///@Environment is a property wrapper in SwiftUI that allows you to access values from the environment of the current view hierarchy.
-    ///managedObjectContext for viewContext
-    @Environment(\.managedObjectContext) private var viewContext
-    //Fetching data from coredata using sorting
-    @FetchRequest(
-        entity: SearchedMovie.entity(),
-        sortDescriptors: [NSSortDescriptor(keyPath: \SearchedMovie.timestamp, ascending: false)],
-        animation: .easeInOut(duration: 0.3)
-    )
-    //Storing FetchedResults from coredate in array
-    private var allRecentSearches: FetchedResults<SearchedMovie>
-    ///The prefix(_:) method allows us to take the first 5 elements of the fetched results array.
-    private var recentSearches: [SearchedMovie] {
-        Array(allRecentSearches.prefix(5))
+//    @ObservedObject var viewModel: MovieSearchViewModel = MovieSearchViewModel()
+    @StateObject private var viewModel: MovieSearchViewModel
+    init(viewModel: MovieSearchViewModel) {
+        _viewModel = StateObject(wrappedValue: viewModel)
     }
     /// @State is a property wrapper used to declare a mutable state variable within a SwiftUI View.
     /// GridItem for LazyVGrid
@@ -43,7 +31,9 @@ struct MovieSearch: View {
                             ForEach(viewModel.arrMovieList, id: \.id) { item in
                                 NavigationLink{
                                     //Navigate to MovieDetails with specified MovieId
-                                    MovieDetails(movieId: item.id ?? 0)
+                                    let dataProvider = MovieDetailsDataProvider()
+                                    let viewModel = MovieDetailsViewModel(dataProvider: dataProvider, movieId: item.id ?? 0)
+                                    MovieDetails(viewModel: viewModel)
                                     //On disappear of MovieDetails view save movie data to coreData
                                         .onDisappear{
                                             self.saveSearch(item: item)
@@ -58,17 +48,19 @@ struct MovieSearch: View {
                     }
                 } else {
                     //For displaying Recently Searched movies from coredata
-                    if recentSearches.count > 0 {
+                    if viewModel.recentSearches.count > 0 {
                         Text(StringConstants.sectionHeaderRecentlySearched)
                             .hAlign(.leading)
                             .padding(.leading, 15)
                         ScrollView(.vertical, showsIndicators: false) {
                             LazyVGrid(columns: gridVLayout) {
-                                ForEach(recentSearches, id: \.id) { item in
+                                ForEach(viewModel.recentSearches, id: \.id) { item in
                                     let movie = MovieSearchData(id: Int(item.id), posterPath: item.posterPath, title: item.title)
                                     NavigationLink{
                                         //Navigate to MovieDetails with specified MovieId
-                                        MovieDetails(movieId: Int(item.id))
+                                        let dataProvider = MovieDetailsDataProvider()
+                                        let viewModel = MovieDetailsViewModel(dataProvider: dataProvider, movieId: Int(item.id))
+                                        MovieDetails(viewModel: viewModel)
                                     } label: {
                                         //For displaying Movie details using @ViewBuilder
                                         SearchUI(item: movie)
@@ -114,6 +106,9 @@ struct MovieSearch: View {
                     self.viewModel.getMovieList(true, searchText: viewModel.searchText)
                 }
             })
+            .onAppear{
+                self.viewModel.getSearchedMovieFromCoreData()
+            }
         }
     }
     
@@ -145,24 +140,7 @@ struct MovieSearch: View {
     //Function to save search text as a new SearchItem entity in Core Data
     private func saveSearch(item: MovieSearchData) {
         withAnimation {
-            do {
-                //Updating new searched movie details to viewContext
-                let newSearch = SearchedMovie(context: viewContext)
-                newSearch.timestamp = Date()
-                newSearch.id = Int64(item.id ?? 0)
-                newSearch.title = item.title
-                newSearch.posterPath = item.posterPath
-                
-                // Optional: If you want to limit the number of recent searches to 5, remove the oldest one
-                if recentSearches.count >= 5 {
-                    viewContext.delete(recentSearches.last!)
-                }
-                //Saving viewContext data to coredata
-                try viewContext.save()
-            } catch {
-                // Handle the error
-                print("Error saving search: \(error)")
-            }
+            self.viewModel.saveSearchedMovieToCoreData(item: item)
         }
     }
 }

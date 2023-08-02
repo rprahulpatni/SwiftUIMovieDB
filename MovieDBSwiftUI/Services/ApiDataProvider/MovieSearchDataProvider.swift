@@ -41,4 +41,6 @@ class MovieSearchDataProvider {
                 self.arrMovieSearchData.send(movieList)
             }).store(in: &self.cancellables)// Store the Combine cancellable for cleanup.
     }
+    
+    
 }

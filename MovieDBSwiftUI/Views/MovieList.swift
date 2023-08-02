@@ -12,7 +12,11 @@ struct MovieList: View {
     // MARK: - Properties
     /// ObservedObject: A property wrapper type that subscribes to an observable object and invalidates a view whenever the observable object changes.
     /// The ViewModel responsible for data flow in this view.
-    @ObservedObject var viewModel : MovieListViewModel = MovieListViewModel()
+    //    @ObservedObject var viewModel : MovieListViewModel = MovieListViewModel()
+    @StateObject private var viewModel: MovieListViewModel
+    init(viewModel: MovieListViewModel) {
+        _viewModel = StateObject(wrappedValue: viewModel)
+    }
     /// @State is a property wrapper used to declare a mutable state variable within a SwiftUI View.
     /// GridItem for LazyVGrid
     @State private var gridVLayout : [GridItem] = [GridItem()]
@@ -26,13 +30,15 @@ struct MovieList: View {
                 LazyVGrid(columns: gridVLayout) {
                     //ForEach for binding data to LazyVGrid view
                     ForEach(viewModel.arrMovieList, id: \.id) { movies in
-                        NavigationLink(destination: {
+                        NavigationLink{
                             //NavigationLink for navigating to movie details page with movieID
-                            MovieDetails(movieId: movies.id ?? 0)
-                        }, label: {
+                            let dataProvider = MovieDetailsDataProvider()
+                            let viewModel = MovieDetailsViewModel(dataProvider: dataProvider, movieId: movies.id ?? 0)
+                            MovieDetails(viewModel: viewModel)
+                        } label: {
                             //For displaying data in LazyVGrid
                             MovieListCell(moviesData: movies)
-                        })
+                        }
                         //Code for Pagination when list view scrolles to last of list
                         if movies.id == viewModel.arrMovieList.last?.id {
                             //Checking page count is less than or equal to total pages
@@ -54,9 +60,7 @@ struct MovieList: View {
             }
             .refreshable{
                 // Pull to refresh
-                viewModel.pageCount = 1
-                viewModel.totalPages = 0
-                viewModel.arrMovieList.removeAll()
+                viewModel.getResetPageNTotalCount()
                 viewModel.getMovieList(true)
             }
             .onAppear(perform: {
@@ -67,8 +71,13 @@ struct MovieList: View {
             //Open if you want to change Navigation header color
             //.navigationBarColor(backgroundColor: .purple, tintColor: .white)
             .toolbar {
-                // Navigate to SearchView on click of Search NavigationLink
-                NavigationLink(destination: MovieSearch()) {
+                //Navigate to SearchView on click of Search NavigationLink
+                NavigationLink{
+                    let dataProvider = MovieSearchDataProvider()
+                    let viewModel = MovieSearchViewModel(dataProvider: dataProvider)
+                    MovieSearch(viewModel: viewModel)
+                } label: {
+                    //For displaying search icon
                     Image(systemName: StringConstants.placeholderImageSearch)
                 }
             }
@@ -81,8 +90,3 @@ struct MovieList: View {
     }
 }
 
-struct MovieList_Previews: PreviewProvider {
-    static var previews: some View {
-        MovieList()
-    }
-}

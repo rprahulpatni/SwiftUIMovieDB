@@ -7,6 +7,7 @@
 
 import Foundation
 import Combine
+import CoreData
 
 // MARK: - ViewModel
 /// ViewModel responsible for managing data flow for the SwiftUI view.
@@ -18,10 +19,20 @@ class MovieSearchViewModel: ObservableObject {
     @Published var isLoading: Bool = false
     /// The array containing the list of movies.
     @Published var arrMovieList: Array<MovieSearchData> = Array<MovieSearchData>()
+    ///The prefix(_:) method allows us to take the first 5 elements of the fetched results array.
+    @Published var recentSearches: Array<SearchedMovie> = Array<SearchedMovie>()
     /// A set to store Combine cancellables for API call subscriptions.
     private var cancellables = Set<AnyCancellable>()
+    ///
+    private let viewContext = PersistenceController.shared.container.viewContext
+    
     /// The instance of the MovieSearchDataProvider.
-    private let movieSearchDataProvider = MovieSearchDataProvider()
+    //    private let movieSearchDataProvider = MovieSearchDataProvider()
+    private let movieSearchDataProvider : MovieSearchDataProvider
+    
+    init(dataProvider: MovieSearchDataProvider) {
+        self.movieSearchDataProvider = dataProvider
+    }
     
     // MARK: - Public Methods
     /// Fetch the seached movie list from the API based on specified search text.
@@ -29,8 +40,8 @@ class MovieSearchViewModel: ObservableObject {
     func getMovieList(_ showLoader: Bool, searchText: String) {
         self.isLoading = true
         // Call the MovieListDataProvider to fetch movie data from the API.
-        movieSearchDataProvider.getMovieList(searchText)
-        movieSearchDataProvider.arrMovieSearchData
+        self.movieSearchDataProvider.getMovieList(searchText)
+        self.movieSearchDataProvider.arrMovieSearchData
         //The .sink operator is used to subscribe to a publisher and receive values emitted by the publisher.
             .sink(receiveCompletion: { completion in
                 // Handle completion events (finished or error).
@@ -50,5 +61,40 @@ class MovieSearchViewModel: ObservableObject {
                 self.isLoading = false
             })
             .store(in: &cancellables)// Store the Combine cancellable for cleanup.
+    }
+    
+    func getSearchedMovieFromCoreData() {
+        viewContext.perform {
+            let fetchRequest: NSFetchRequest<SearchedMovie> = SearchedMovie.fetchRequest()
+            fetchRequest.sortDescriptors = [NSSortDescriptor(keyPath: \SearchedMovie.timestamp, ascending: false)]
+            do {
+                let allRecentSearches = try! self.viewContext.fetch(fetchRequest)
+                self.recentSearches = Array(allRecentSearches.prefix(5))
+            } catch {
+                print("Error deleting existing movies: \(error)")
+            }
+        }
+    }
+    
+    func saveSearchedMovieToCoreData(item: MovieSearchData) {
+        do {
+            self.getSearchedMovieFromCoreData()
+            //Updating new searched movie details to viewContext
+            let newSearch = SearchedMovie(context: viewContext)
+            newSearch.timestamp = Date()
+            newSearch.id = Int64(item.id ?? 0)
+            newSearch.title = item.title
+            newSearch.posterPath = item.posterPath
+            
+            // Optional: If you want to limit the number of recent searches to 5, remove the oldest one
+            if recentSearches.count >= 5 {
+                viewContext.delete(self.recentSearches.last!)
+            }
+            //Saving viewContext data to coredata
+            try viewContext.save()
+        } catch {
+            // Handle the error
+            print("Error saving search: \(error)")
+        }
     }
 }

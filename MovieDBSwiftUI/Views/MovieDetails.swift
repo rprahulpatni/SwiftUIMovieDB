@@ -12,10 +12,14 @@ struct MovieDetails: View {
     // MARK: - Properties
     /// ObservedObject: A property wrapper type that subscribes to an observable object and invalidates a view whenever the observable object changes.
     /// The ViewModel responsible for data flow in this view.
-    @ObservedObject var viewModel : MovieDetailsViewModel = MovieDetailsViewModel()
+//    @ObservedObject var viewModel : MovieDetailsViewModel = MovieDetailsViewModel()
+    @StateObject private var viewModel: MovieDetailsViewModel
+    init(viewModel: MovieDetailsViewModel) {
+        _viewModel = StateObject(wrappedValue: viewModel)
+    }
     /// @State is a property wrapper used to declare a mutable state variable within a SwiftUI View.
     /// movieId for getting specifed movie details
-    @State var movieId: Int = 0
+//    @State var movieId: Int = 0
 
     var body: some View {
         ZStack{
@@ -34,12 +38,12 @@ struct MovieDetails: View {
                     })
                         .background(.white)
                     //Reusable view for displaying Movie Review with section header
-                    MovieDetailsReviewCell(categoryName: StringConstants.sectionHeaderReviews, movieId: self.movieId, movieReview: viewModel.arrReviewMovieList)
+                    MovieDetailsReviewCell(categoryName: StringConstants.sectionHeaderReviews, movieId: self.viewModel.movieId, movieReview: viewModel.arrReviewMovieList)
                         .background(.white)
                     //Reusable view for displaying Movie Similar list with section header
                     MovieDetailsSectionWithGridViewCell(categoryName: StringConstants.sectionHeaderSimilarResults, movieSimilar: viewModel.arrSimilarMovieList, movieCastNCrew: viewModel.arrMovieCrewList, onTab: { item in
                         //Updating movieId for fetching details assosiacted with specified movieID
-                        self.movieId = item
+                        self.viewModel.movieId = item
                         //Removing all values from array for updating new value
                         self.viewModel.arrMovieCastList.removeAll()
                         self.viewModel.arrMovieCrewList.removeAll()
@@ -71,13 +75,13 @@ struct MovieDetails: View {
     //Private method for fetching movie details from viewModel
     private func callAPI() {
         //For fetching Movie Details
-        viewModel.getMovieDetails(movieId)
+        viewModel.getMovieDetails()
         //For fetching movie cast n crew
-        viewModel.getMovieCastNCrew(movieId)
+        viewModel.getMovieCastNCrew()
         //For fetching movie similar movie list
-        viewModel.getMovieSimilarDetails(movieId)
+        viewModel.getMovieSimilarDetails()
         //For fetching movie reviews
-        viewModel.getMovieReviewDetails(movieId)
+        viewModel.getMovieReviewDetails()
     }
 }
 

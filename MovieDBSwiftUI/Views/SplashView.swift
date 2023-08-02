@@ -16,7 +16,10 @@ struct SplashView: View {
         ZStack {
             Color.white // Set your desired background color for the splash screen
             if showMainView {
-                MovieList()
+                // Dependency Injection Example
+                let dataProvider = MovieListDataProvider()
+                let viewModel = MovieListViewModel(dataProvider: dataProvider)
+                MovieList(viewModel: viewModel)
             }
             //Showing Image view with animation, scale effect and transitions
             Image(StringConstants.placeholderImageLogo)

@@ -27,13 +27,21 @@ class MovieDetailsViewModel: ObservableObject {
     /// A set to store Combine cancellables for API call subscriptions.
     private var cancellables = Set<AnyCancellable>()
     /// The instance of the MovieDetailsDataProvider.
-    private let movieDetailsDataProvider = MovieDetailsDataProvider()
+//    private let movieDetailsDataProvider = MovieDetailsDataProvider()
+    private let movieDetailsDataProvider : MovieDetailsDataProvider
 
+    var movieId: Int = 0
+    
+    init(dataProvider: MovieDetailsDataProvider, movieId: Int) {
+        self.movieDetailsDataProvider = dataProvider
+        self.movieId = movieId
+    }
+    
     // MARK: - Public Methods
     /// Fetch the movie details from the API based on specified movieID.
-    func getMovieDetails(_ movieId: Int) {
+    func getMovieDetails() {
         self.isLoading = true
-        movieDetailsDataProvider.getMovieDetails("\(movieId)")
+        movieDetailsDataProvider.getMovieDetails("\(self.movieId)")
         movieDetailsDataProvider.dictMovieDetails
         //The .sink operator is used to subscribe to a publisher and receive values emitted by the publisher.
             .sink(receiveCompletion: { completion in
@@ -52,8 +60,8 @@ class MovieDetailsViewModel: ObservableObject {
     }
     
     /// Fetch the movie cast n crew members list from the API based on specified movieID.
-    func getMovieCastNCrew(_ movieId: Int) {
-        movieDetailsDataProvider.getMovieCastNCrewData("\(movieId)")
+    func getMovieCastNCrew() {
+        movieDetailsDataProvider.getMovieCastNCrewData("\(self.movieId)")
         movieDetailsDataProvider.arrMovieCastNCrewData
         //The .sink operator is used to subscribe to a publisher and receive values emitted by the publisher.
             .sink(receiveCompletion: { completion in
@@ -73,8 +81,8 @@ class MovieDetailsViewModel: ObservableObject {
     }
     
     /// Fetch the movie similar list from the API based on specified movieID.
-    func getMovieSimilarDetails(_ movieId: Int) {
-        movieDetailsDataProvider.getMovieSimilarData("\(movieId)")
+    func getMovieSimilarDetails() {
+        movieDetailsDataProvider.getMovieSimilarData("\(self.movieId)")
         movieDetailsDataProvider.arrMovieSimilarData
         //The .sink operator is used to subscribe to a publisher and receive values emitted by the publisher.
             .sink(receiveCompletion: { completion in
@@ -93,8 +101,8 @@ class MovieDetailsViewModel: ObservableObject {
     }
     
     /// Fetch the movie reviews list from the API based on specified movieID.
-    func getMovieReviewDetails(_ movieId: Int) {
-        movieDetailsDataProvider.getMovieReviewData("\(movieId)")
+    func getMovieReviewDetails() {
+        movieDetailsDataProvider.getMovieReviewData("\(self.movieId)")
         movieDetailsDataProvider.arrMovieReviewData
         //The .sink operator is used to subscribe to a publisher and receive values emitted by the publisher.
             .sink(receiveCompletion: { completion in

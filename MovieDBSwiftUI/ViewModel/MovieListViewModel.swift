@@ -7,12 +7,13 @@
 
 import Foundation
 import Combine
+
 //MARK: - ViewModel for MovieList
 //ViewModel responsible for managing data flow for MovieList
-class MovieListViewModel: ObservableObject {
+class MovieListViewModel : ObservableObject{
     //MARK: - Properties
     /// The array containing the list of movies.
-    @Published var arrMovieList: Array<MovieListData> = Array<MovieListData>()
+    @Published  var arrMovieList: Array<MovieListData> = Array<MovieListData>()
     /// A flag indicating whether the ViewModel is currently loading data from the API.
     @Published var isLoading: Bool = false
     /// The total number of pages available from the API.
@@ -22,8 +23,12 @@ class MovieListViewModel: ObservableObject {
     /// A set to store Combine cancellables for API call subscriptions.
     private var cancellables = Set<AnyCancellable>()
     /// The instance of the MovieListDataProvider.
-    private let movieListDataProvider = MovieListDataProvider()
+    private let movieListDataProvider : MovieListDataProvider
 
+    init(dataProvider: MovieListDataProvider) {
+        self.movieListDataProvider = dataProvider
+    }
+    
     // MARK: - Public Methods
     /// Fetch the movie list from the API.
     /// - Parameter showLoader: A boolean flag indicating whether to show a loading indicator during the API call.
@@ -57,5 +62,11 @@ class MovieListViewModel: ObservableObject {
                 self.isLoading = false
             })
             .store(in: &cancellables)// Store the Combine cancellable for cleanup.
+    }
+    
+    func getResetPageNTotalCount() {
+        self.pageCount = 1
+        self.totalPages = 0
+        self.arrMovieList.removeAll()
     }
 }
