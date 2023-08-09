@@ -46,19 +46,24 @@ extension DateFormatter {
         }
     }
     
-    static func convertMinutesToHoursAndMinutes(_ minutes: Int) -> String {
-        let hours = minutes / 60
-        let remainingMinutes = minutes % 60
+    static func convertMinutesToHoursAndMinutes(_ duration: Int) -> String {
+        let hours = duration / 3600
+        let minutes = (duration % 3600) / 60
+        let seconds = duration % 60
+        
+        var formattedDuration = ""
         
         if hours > 0 {
-            if remainingMinutes > 0 {
-                return "\(hours)h \(remainingMinutes)min"
-            } else {
-                return "\(hours)h"
-            }
-        } else {
-            return "\(remainingMinutes)min"
+            formattedDuration += "\(hours)h "
         }
+        
+        if minutes > 0 {
+            formattedDuration += "\(minutes)m "
+        }
+        
+        formattedDuration += "\(seconds)s"
+        
+        return formattedDuration
     }
 }
 

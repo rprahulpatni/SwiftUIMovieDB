@@ -14,7 +14,8 @@ struct CustomSDWebImageView: View {
     var imgHeight: CGFloat?
     var placeholderImage: String?
     var isCircle: Bool
-    
+    var cornerRadius: CGFloat = 0
+
     var body: some View {
         //For displaying Movie Image
         //Using SDWebImageView for displaying image with cache, placeholder
@@ -30,10 +31,8 @@ struct CustomSDWebImageView: View {
         .transition(.fade)
         .aspectRatio(contentMode: .fill)
         .frame(width: imgWidth, height: imgHeight)
-//        .scaledToFit()
-//        .scaledToFill()
         .clipped()
-        .background(.gray.opacity(0.6))
-        .cornerRadius(isCircle == true ? imgHeight! / 2 : 0)
+        .background(.thinMaterial)
+        .cornerRadius(isCircle == true ? imgHeight! / 2 : cornerRadius)
     }
 }
